@@ -1,5 +1,5 @@
 public class MAIN {
     public void main(String[] args) {
-        int new = 3;
+        int hahaha = 3;
     }
 }
