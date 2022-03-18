@@ -2,7 +2,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KEYLISTENER implements KeyListener {
-    GAMESTATE gamestate;
+
 
     @Override
     public void keyTyped(KeyEvent e){
@@ -11,26 +11,46 @@ public class KEYLISTENER implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e){
-        switch(gamestate){
+        System.out.println(e.getKeyChar() + "--->" + e.getExtendedKeyCode());
+
+        switch(GAME.gamestate){
             case options:
+                switch(e.getKeyCode()){
+                    case KeyEvent.VK_ESCAPE:
+                        GAME.gamestate = GAMESTATE.pause;
+                        System.out.println("pause");
+                        break;
+                }
+                break;
 
             case pause:
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    gamestate = GAMESTATE.ingame;
+                switch(e.getKeyCode()){
+                    case KeyEvent.VK_ESCAPE:
+                        GAME.gamestate = GAMESTATE.ingame;
+                        System.out.println("ingame");
+                        break;
                 }
                 break;
 
             case ingame:
-
-            case start:
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    gamestate = GAMESTATE.options;
+                switch(e.getKeyCode()){
+                    case KeyEvent.VK_ESCAPE:
+                        System.out.println("esc");
+                        GAME.gamestate = GAMESTATE.pause;
+                        System.out.println("pause");
+                        break;
                 }
                 break;
 
-
+            case start:
+                switch(e.getKeyCode()){
+                    case KeyEvent.VK_ESCAPE:
+                        GAME.gamestate = GAMESTATE.pause;
+                        System.out.println("pause");
+                        break;
+                }
+                break;
         }
-
     }
 
     @Override

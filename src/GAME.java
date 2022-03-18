@@ -7,13 +7,12 @@ public class GAME {
     KEYLISTENER keylistener;
     BOARD board;
     CLOCK clock;
-    GAMESTATE gamestate ;
+    public static GAMESTATE gamestate ;
     IMAGELOADER imageloader;
 
 
 public GAME(){
     gamestate = GAMESTATE.start;
-    imageloader = new IMAGELOADER();
     startGame();
 }
 
@@ -21,11 +20,12 @@ public GAME(){
 
 
     private void startGame(){
-    gui = new GUI("KryptoKnight");
+        gui = new GUI("KryptoKnight");
+        imageloader = new IMAGELOADER();
     }
 
     private void endGame(){
-    gamestate = GAMESTATE.pause;
+
         }
 
 }
