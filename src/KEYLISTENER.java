@@ -39,6 +39,20 @@ public class KEYLISTENER implements KeyListener {
                         GAME.gamestate = GAMESTATE.pause;
                         System.out.println("pause");
                         break;
+                    case KeyEvent.VK_DOWN:
+                        GAME.playerList.get(0).y += 10;
+                        break;
+                    case KeyEvent.VK_UP:
+                        GAME.playerList.get(0).y -= 10;
+                        break;
+
+                    case KeyEvent.VK_RIGHT:
+                        GAME.playerList.get(0).x += 10;
+                        break;
+
+                    case KeyEvent.VK_LEFT:
+                        GAME.playerList.get(0).x -= 10;
+                        break;
                 }
                 break;
 

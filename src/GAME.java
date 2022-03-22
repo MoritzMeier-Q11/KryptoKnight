@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class GAME {
     GUI gui;
-    ArrayList <PLAYER> playerList;
+    public static ArrayList <PLAYER> playerList;
     STORAGE storage;
     KEYLISTENER keylistener;
     BOARD board;
@@ -12,8 +12,11 @@ public class GAME {
 
 
 public GAME(){
+    playerList = new ArrayList<>();
+    playerList.add(new PLAYER("sees"));
     gamestate = GAMESTATE.start;
     startGame();
+
 }
 
 
@@ -22,6 +25,7 @@ public GAME(){
     private void startGame(){
         gui = new GUI("KryptoKnight");
         imageloader = new IMAGELOADER();
+
     }
 
     private void endGame(){
