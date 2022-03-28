@@ -1,12 +1,35 @@
 import java.awt.*;
 
 public class PLAYER {
-    private String name;
-    private Color color;
-    private int levelOfEncryption;
-    public int x, y;
+    String name;
+    Color color;
+    int levelOfEncryption;
+    int x, y;
 
-    PLAYER(String name){
+
+    void setName(String name){
         this.name = name;
     }
+    void setColor(Color color){
+        this.color = color;
+    }
+    void setLevelOfEncryption(int levelOfEncryption){
+        this.levelOfEncryption = levelOfEncryption;
+    }
+    void setPosition(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+    void setBounds(String name, Color color, int levelOfEncryption, int x, int y){
+        this.name = name;
+        this.color = color;
+        this.levelOfEncryption = levelOfEncryption;
+        this.x = x;
+        this.y = y;
+    }
+
+
+
+
+
 }
