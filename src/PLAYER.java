@@ -13,9 +13,6 @@ public class PLAYER {
         this.x = x;
         this.y = y;
     }
-    PLAYER(){
-
-    }
 
     void setBounds(String name, Color color, int levelOfEncryption, int x, int y){
         this.name = name;

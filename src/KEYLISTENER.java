@@ -35,7 +35,6 @@ public class KEYLISTENER implements KeyListener {
             case ingame:
                 switch(e.getKeyCode()){
                     case KeyEvent.VK_ESCAPE:
-                        System.out.println("esc");
                         GAME.gamestate = GAMESTATE.pause;
                         System.out.println("pause");
                         break;
@@ -52,6 +51,21 @@ public class KEYLISTENER implements KeyListener {
 
                     case KeyEvent.VK_LEFT:
                         GAME.playerList.get(0).x -= 10;
+                        break;
+
+                    case KeyEvent.VK_S:
+                        GAME.playerList.get(1).y += 10;
+                        break;
+                    case KeyEvent.VK_W:
+                        GAME.playerList.get(1).y -= 10;
+                        break;
+
+                    case KeyEvent.VK_D:
+                        GAME.playerList.get(1).x += 10;
+                        break;
+
+                    case KeyEvent.VK_A:
+                        GAME.playerList.get(1).x -= 10;
                         break;
                 }
                 break;

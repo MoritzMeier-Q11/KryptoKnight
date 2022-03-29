@@ -11,6 +11,8 @@ public class GUI {
     public static int width = 1200;
     public static int height = 900;
     private static KEYLISTENER keylistener;
+    public static JButton addNewPlayerButton;
+    public static JTextField addNewPlayerTextField;
 
 
 
@@ -71,6 +73,29 @@ public class GUI {
 
         //--------------------------------------------------------------------
 
+        //-------------------options--------------------------------------------
+        addNewPlayerTextField = new JTextField();
+        addNewPlayerTextField.setBounds(120, 50, 100, 40);
+        addNewPlayerTextField.setVisible(false);
+        addNewPlayerTextField.setEnabled(false);
+        mainFrame.add(addNewPlayerTextField);
+
+        addNewPlayerButton = new JButton("add Player");
+        addNewPlayerButton.setBounds(10, 50, 100, 40);
+        addNewPlayerButton.setBackground(Color.yellow);
+        addNewPlayerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        addNewPlayerButton.setVisible(false);
+        addNewPlayerButton.setEnabled(false);
+        mainFrame.add(addNewPlayerButton);
+
+
+        //----------------------------------------------------------------------
+
 
 
         //--------------------drawing----------------------------------------
@@ -78,8 +103,6 @@ public class GUI {
         draw.setBounds(0, 0, width, height);
         mainFrame.add(draw);
         //-------------------------------------------------------------------
-
-
 
         //-------------------startingScreen----------------------------------
             /*JButton startGameButton = new JButton("START");
@@ -97,7 +120,7 @@ public class GUI {
              */
 
         //---------------------------------------------------------------------
-
-
     }
+
+
 }
