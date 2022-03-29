@@ -14,14 +14,12 @@ public class GAME {
 
 public GAME(){
     playerList = new ArrayList<>();
-    playerList.add(new PLAYER());
-    playerList.get(0).setBounds("sees", Color.darkGray, 1, 40, 40);
-    playerList.add(new PLAYER());
-    playerList.get(1).setBounds("seeeees", Color.darkGray, 2, 40, 40);
+    playerList.add(new PLAYER("player1", Color.darkGray, 1, 40, 40));
+    playerList.add(new PLAYER("player2", Color.lightGray, 2, 90, 90));
     gamestate = GAMESTATE.start;
-    startGame();
-    STORAGE.save();
+    //STORAGE.save();
     STORAGE.load();
+    startGame();
 
 }
 

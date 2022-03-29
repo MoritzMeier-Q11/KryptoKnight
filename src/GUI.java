@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class GUI {
     private JFrame mainFrame;
@@ -19,7 +21,7 @@ public class GUI {
         mainFrame = new JFrame(title);
         mainFrame.setSize(width, height);
         mainFrame.setResizable(false);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setLayout(null);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setIconImage(IMAGELOADER.icon);
@@ -28,6 +30,45 @@ public class GUI {
         mainFrame.setVisible(true);
         keylistener = new KEYLISTENER();
         mainFrame.addKeyListener(keylistener);
+        mainFrame.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                STORAGE.save();
+                //GAME.playerList.get(0)
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
+
         //--------------------------------------------------------------------
 
 
