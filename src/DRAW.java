@@ -1,3 +1,5 @@
+package src;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,7 +14,7 @@ public class DRAW extends JLabel {
 
         switch (GAME.gamestate){
             case start:
-                    g.drawImage(IMAGELOADER.icon, 300, 150, 600, 600, null);
+                    g.drawImage(IMAGELOADER.startAnimation[ANIMATION.animationImageCount], 300, 150, 600, 600, null);
 
                     GUI.addNewPlayerButton.setVisible(false);
                     GUI.addNewPlayerButton.setEnabled(false);
