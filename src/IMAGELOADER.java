@@ -11,12 +11,12 @@ public class IMAGELOADER {
 
 
     public IMAGELOADER() {
-        startAnimation = new BufferedImage[73];
+        startAnimation = new BufferedImage[117];
         try {
             icon = ImageIO.read(new File("rcs/icon.png"));
             map = ImageIO.read(new File("rcs/map.png"));
             player = ImageIO.read(new File("rcs/player.png"));
-            for (int i = 1; i < 74; i++) {
+            for (int i = 1; i < 118; i++) {
                 startAnimation[i] = ImageIO.read(new File("rcs/Start-" + String.valueOf(i) + ".png"));
             }
         } catch (IOException e) {

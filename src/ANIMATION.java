@@ -16,6 +16,6 @@ public class ANIMATION
             public void run() {
                 animationImageCount++;
             }
-        }, 0, 50);
+        }, 0, 30);
     }
 }
