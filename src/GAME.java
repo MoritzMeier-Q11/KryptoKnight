@@ -22,7 +22,9 @@ public class GAME {
         //STORAGE.save();
         STORAGE.load();
         startGame();
-        startAudio();
+        AUDIOPLAYER.Start();
+        ANIMATION.playAnimation();
+        
         }
 
 
@@ -38,6 +40,12 @@ public class GAME {
     {
         new AUDIOPLAYER();
         AUDIOPLAYER.Start();
+    }
+    
+    public static void startAnimation()
+    {
+        new ANIMATION();
+        ANIMATION.playAnimation();
     }
     
     private void endGame(){

@@ -17,5 +17,6 @@ public class ANIMATION
                 animationImageCount++;
             }
         }, 0, 30);
+        System.out.println("Animation started");
     }
 }
