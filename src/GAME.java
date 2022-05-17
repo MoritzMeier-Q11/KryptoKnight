@@ -22,7 +22,7 @@ public class GAME {
         //STORAGE.save();
         STORAGE.load();
         startGame();
-
+        startAudio();
         }
 
 
@@ -31,9 +31,15 @@ public class GAME {
     private void startGame(){
         gui = new GUI("KryptoKnight");
         imageloader = new IMAGELOADER();
-
+        
         }
-
+    
+    public static void startAudio()
+    {
+        new AUDIOPLAYER();
+        AUDIOPLAYER.Start();
+    }
+    
     private void endGame(){
 
         }

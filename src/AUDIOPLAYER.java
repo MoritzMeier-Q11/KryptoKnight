@@ -97,16 +97,23 @@ public class AUDIOPLAYER implements LineListener {
  
     }
  
-    public static void Titlemenu(String[] args) 
+    public static void Titlemenu() 
     {
-        String audioFilePath = "rcs/Test.wav";
+        String audioFilePath = "rcs/Audio/Test.wav";
         AUDIOPLAYER player = new AUDIOPLAYER();
         player.play(audioFilePath);
     }
     
-    public static void Music(String[] args) 
+    public static void Start() 
     {
-        String audioFilePath = "rcs/Test2.wav";
+        String audioFilePath = "rcs/Audio/Intro.wav";
+        AUDIOPLAYER player = new AUDIOPLAYER();
+        player.play(audioFilePath);
+    }
+    
+    public static void Music() 
+    {
+        String audioFilePath = "rcs/Audio/Test2.wav";
         AUDIOPLAYER player = new AUDIOPLAYER();
         player.play(audioFilePath);
     }
