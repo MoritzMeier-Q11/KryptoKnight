@@ -24,6 +24,7 @@ public class IMAGELOADER {
             System.out.println("image loading error");
         }
     }
+    
     public static void test() {
         System.out.println("rcs/Start " + String.valueOf(1) + ".png");
     }

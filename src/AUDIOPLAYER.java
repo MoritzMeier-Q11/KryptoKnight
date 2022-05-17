@@ -111,6 +111,13 @@ public class AUDIOPLAYER implements LineListener {
         player.play(audioFilePath);
     }
     
+    public static void Tetris() 
+    {
+        String audioFilePath = "rcs/Audio/Tetris.wav";
+        AUDIOPLAYER player = new AUDIOPLAYER();
+        player.play(audioFilePath);
+    }
+    
     public static void Music() 
     {
         String audioFilePath = "rcs/Audio/Test2.wav";

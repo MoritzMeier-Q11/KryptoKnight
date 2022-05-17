@@ -55,6 +55,8 @@ public class TETRIS_MAIN {
         GameOverLabel.setForeground(Color.WHITE);
         GamePanel.add(GameOverLabel);
 
+        AUDIOPLAYER.Tetris();
+                
         MainFrame.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {

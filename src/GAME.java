@@ -27,9 +27,6 @@ public class GAME {
         
         }
 
-
-
-
     private void startGame(){
         gui = new GUI("KryptoKnight");
         imageloader = new IMAGELOADER();
