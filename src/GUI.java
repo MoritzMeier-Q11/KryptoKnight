@@ -1,40 +1,33 @@
-package src;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Stack;
 
 public class GUI {
-    private JFrame mainFrame;
-    private DRAW draw;
-    public static int width = 1200;
-    public static int height = 900;
-    private static KEYLISTENER keylistener;
-    public static JButton addNewPlayerButton;
-    public static JTextField addNewPlayerTextField;
 
+    public static JFrame mf;
+    public static int width, height;
+    public static Stack<Component> stack;
 
+    public GUI() {
 
+        stack = new Stack<>();
+        mf = new JFrame("KryptoKnight");
+        mf.setResizable(false);
+        mf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mf.setLayout(null);
+        mf.setLocationRelativeTo(null);
+        mf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mf.setUndecorated(true);
+        mf.setVisible(true);
+        mf.getContentPane().setBackground(Color.darkGray);
 
-    public GUI(String title) {
+        width = mf.getWidth();
+        height = mf.getHeight();
 
-        //------------------gameWindow----------------------------------------
-        mainFrame = new JFrame(title);
-        mainFrame.setSize(width, height);
-        mainFrame.setResizable(false);
-        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        mainFrame.setLayout(null);
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setIconImage(IMAGELOADER.icon);
-        //jframe.getContentPane().setBackground(Color.lightGray);
-        mainFrame.requestFocus();
-        mainFrame.setVisible(true);
-        keylistener = new KEYLISTENER();
-        mainFrame.addKeyListener(keylistener);
-        mainFrame.addWindowListener(new WindowListener() {
+        mf.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
 
@@ -43,7 +36,6 @@ public class GUI {
             @Override
             public void windowClosing(WindowEvent e) {
                 STORAGE.save();
-                //GAME.playerList.get(0)
             }
 
             @Override
@@ -73,56 +65,31 @@ public class GUI {
             }
         });
 
-        //--------------------------------------------------------------------
-
-        //-------------------options--------------------------------------------
-        addNewPlayerTextField = new JTextField();
-        addNewPlayerTextField.setBounds(120, 50, 100, 40);
-        addNewPlayerTextField.setVisible(false);
-        addNewPlayerTextField.setEnabled(false);
-        mainFrame.add(addNewPlayerTextField);
-
-        addNewPlayerButton = new JButton("add Player");
-        addNewPlayerButton.setBounds(10, 50, 100, 40);
-        addNewPlayerButton.setBackground(Color.yellow);
-        addNewPlayerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        addNewPlayerButton.setVisible(false);
-        addNewPlayerButton.setEnabled(false);
-        mainFrame.add(addNewPlayerButton);
-
-
-        //----------------------------------------------------------------------
-
-
-
-        //--------------------drawing----------------------------------------
-        draw = new DRAW();
-        draw.setBounds(0, 0, width, height);
-        mainFrame.add(draw);
-        //-------------------------------------------------------------------
-
-        //-------------------startingScreen----------------------------------
-            /*JButton startGameButton = new JButton("START");
-            startGameButton.setBounds(0, 0, 200, 80);
-            startGameButton.setBackground(Color.yellow);
-            startGameButton.setVisible(true);
-            startGameButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    GAME.gamestate = GAMESTATE.ingame;
-                }
-            });
-            mainFrame.add(startGameButton);
-
-             */
-
-        //---------------------------------------------------------------------
     }
 
+        public static void addPanel (JPanel panel, KeyListener keyListener){
+            mf.add(panel);
+            mf.addKeyListener(keyListener);
+            stack.push(panel);
+            mf.repaint();
+        }
 
-}
+        public static void removePanel () {
+            mf.remove(stack.pop());
+            mf.removeKeyListener(mf.getKeyListeners()[mf.getKeyListeners().length - 1]);
+            mf.repaint();
+        }
+
+        public static void removeCertainPanel (JPanel panel){
+            mf.remove(panel);
+            stack.push(panel);
+            mf.repaint();
+        }
+
+        public static void removeAllPanel () {
+            for (Component c : stack) {
+                mf.remove(c);
+            }
+            mf.repaint();
+        }
+    }

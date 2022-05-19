@@ -1,18 +1,16 @@
-package src;
-
 import java.awt.*;
 import java.io.*;
 import java.util.*;
 
 public class STORAGE {
-    
+
     static File storageFile = new File("rcs/storage.txt");
     static ArrayList<String> data = new ArrayList<>();
-    
-    
-    
+
+
+
     static void save(){
-        System.out.println("saving");
+        System.out.println("saving data");
         data.clear();
 
         for (int i = 0; i < GAME.playerList.size(); i++) {
@@ -21,8 +19,9 @@ public class STORAGE {
             data.add(String.valueOf(GAME.playerList.get(i).color.getGreen()));
             data.add(String.valueOf(GAME.playerList.get(i).color.getBlue()));
             data.add(String.valueOf(GAME.playerList.get(i).levelOfEncryption));
-            data.add(String.valueOf(GAME.playerList.get(i).x));
-            data.add(String.valueOf(GAME.playerList.get(i).y));
+            data.add(String.valueOf(GAME.playerList.get(i).position));
+
+
             data.add(" ");
         }
 
@@ -47,9 +46,9 @@ public class STORAGE {
         }
     }
 
-    
+
     static void load(){
-        System.out.println("loading");
+        System.out.println("loading data");
         try{
             data.clear();
             Scanner scanner = new Scanner(storageFile);
@@ -58,11 +57,10 @@ public class STORAGE {
             }
             scanner.close();
             GAME.playerList.clear();
-            for (int i = 0; i < data.size(); i+=7) {
+            for (int i = 0; i < data.size(); i+=6) {
                 GAME.playerList.add(new PLAYER(data.get(i), new Color(Integer.parseInt(data.get(i + 1)),
-                Integer.parseInt(data.get(i + 2)), Integer.parseInt(data.get(i + 3))),
-                Integer.parseInt(data.get(i + 4)), Integer.parseInt(data.get(i + 5)),
-                Integer.parseInt(data.get(i + 6)) ) );
+                        Integer.parseInt(data.get(i + 2)), Integer.parseInt(data.get(i + 3))),
+                        Integer.parseInt(data.get(i + 4)), Integer.parseInt(data.get(i + 5))));
             }
 
 
@@ -71,5 +69,5 @@ public class STORAGE {
             System.out.println("error while loading");
         }
     }
-            
+
 }

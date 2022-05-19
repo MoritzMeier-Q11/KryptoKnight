@@ -1,8 +1,6 @@
-package src;
- 
 import java.io.File;
 import java.io.IOException;
- 
+
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -18,60 +16,60 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 //Bei der play Methode "rcs/DATEINAME"
 
 public class AUDIOPLAYER implements LineListener {
-    
+
     boolean playCompleted;
-    
-    void play(String audioFilePath) 
+
+    void play(String audioFilePath)
     {
-        
+
         File audioFile = new File(audioFilePath);
- 
-        try 
+
+        try
         {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
- 
+
             AudioFormat format = audioStream.getFormat();
- 
+
             DataLine.Info info = new DataLine.Info(Clip.class, format);
- 
+
             Clip audioClip = (Clip) AudioSystem.getLine(info);
- 
+
             audioClip.addLineListener(this);
- 
+
             audioClip.open(audioStream);
-             
+
             audioClip.start();
-             
-            while (!playCompleted) 
+
+            while (!playCompleted)
             {
-                try 
+                try
                 {
                     Thread.sleep(1000);
                 }
-                
-                catch (InterruptedException ex) 
+
+                catch (InterruptedException ex)
                 {
                     ex.printStackTrace();
                 }
             }
-             
+
             audioClip.close();
-             
+
         }
-        
-        catch (UnsupportedAudioFileException ex) 
+
+        catch (UnsupportedAudioFileException ex)
         {
-            System.out.println("Audiodatei nicht unterstützt");
+            System.out.println("Audiodatei nicht unterstï¿½tzt");
             ex.printStackTrace();
         }
-        
-        catch (LineUnavailableException ex) 
+
+        catch (LineUnavailableException ex)
         {
-            System.out.println("Line ist nicht Verfügbar");
+            System.out.println("Line ist nicht Verfï¿½gbar");
             ex.printStackTrace();
-        } 
-        
-        catch (IOException ex) 
+        }
+
+        catch (IOException ex)
         {
             System.out.println("Error beim abspielen");
             ex.printStackTrace();
@@ -79,46 +77,46 @@ public class AUDIOPLAYER implements LineListener {
     }
 
     @Override
-    public void update(LineEvent event) 
+    public void update(LineEvent event)
     {
         LineEvent.Type type = event.getType();
-         
-        if (type == LineEvent.Type.START) 
+
+        if (type == LineEvent.Type.START)
         {
             System.out.println("Playback started.");
-             
-        } 
-        
-        else if (type == LineEvent.Type.STOP) 
+
+        }
+
+        else if (type == LineEvent.Type.STOP)
         {
             playCompleted = true;
             System.out.println("Playback completed.");
         }
- 
+
     }
- 
-    public static void Titlemenu() 
+
+    public static void Titlemenu()
     {
         String audioFilePath = "rcs/Audio/Test.wav";
         AUDIOPLAYER player = new AUDIOPLAYER();
         player.play(audioFilePath);
     }
-    
-    public static void Start() 
+
+    public static void Start()
     {
         String audioFilePath = "rcs/Audio/Intro.wav";
         AUDIOPLAYER player = new AUDIOPLAYER();
         player.play(audioFilePath);
     }
-    
-    public static void Tetris() 
+
+    public static void Tetris()
     {
         String audioFilePath = "rcs/Audio/Tetris.wav";
         AUDIOPLAYER player = new AUDIOPLAYER();
         player.play(audioFilePath);
     }
-    
-    public static void Music() 
+
+    public static void Music()
     {
         String audioFilePath = "rcs/Audio/Test2.wav";
         AUDIOPLAYER player = new AUDIOPLAYER();

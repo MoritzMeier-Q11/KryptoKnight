@@ -1,5 +1,3 @@
-package src;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,21 +9,17 @@ public class IMAGELOADER {
 
 
     public IMAGELOADER() {
-        startAnimation = new BufferedImage[117];
+        startAnimation = new BufferedImage[118];
         try {
             icon = ImageIO.read(new File("rcs/icon.png"));
             map = ImageIO.read(new File("rcs/map.png"));
             player = ImageIO.read(new File("rcs/player.png"));
             for (int i = 1; i < 118; i++) {
-                startAnimation[i] = ImageIO.read(new File("rcs/Start-" + String.valueOf(i) + ".png"));
+                startAnimation[i] = ImageIO.read(new File("rcs/StartAnimation/Start-" + String.valueOf(i) + ".png"));
             }
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("image loading error");
         }
-    }
-    
-    public static void test() {
-        System.out.println("rcs/Start " + String.valueOf(1) + ".png");
     }
 }
