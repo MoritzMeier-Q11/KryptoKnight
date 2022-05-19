@@ -36,20 +36,7 @@ public class START {
         drawstart.setVisible(true);
         panel.add(drawstart);
 
-        JButton startButton = new JButton("Start");
-        startButton.setBounds(GUI.width / 2 - 100, GUI.height / 2 + 200, 200, 60);
-        startButton.setBackground(Color.blue);
-        startButton.setForeground(Color.red);
-        startButton.setFocusable(false);
-        startButton.setVisible(true);
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GUI.removePanel();
-                GUI.addPanel(BOARD.panel, BOARD.keyListener);
-            }
-        });
-        panel.add(startButton);
+
 
 
         JLabel maxPlayer = new JLabel("Maximale Anzahl an Spielern", SwingConstants.CENTER);
@@ -57,6 +44,12 @@ public class START {
         maxPlayer.setForeground(Color.red);
         maxPlayer.setVisible(false);
         panel.add(maxPlayer);
+
+        JLabel minPlayer = new JLabel("Zum Spielen Spieler hinzufügen", SwingConstants.CENTER);
+        minPlayer.setBounds(GUI.width / 2 - 100, GUI.height / 2 + 160, 200, 30);
+        minPlayer.setForeground(Color.red);
+        minPlayer.setVisible(false);
+        panel.add(minPlayer);
 
         // Anzahl der Spieler festlegen
         JTextField jTextField = new JTextField();
@@ -73,6 +66,7 @@ public class START {
                         GAME.playerList.add(new PLAYER(jTextField.getText().replaceAll("\\s", ""), Color.green, 3, 0));
                         jTextField.setText("");
                         ShowCurrentPlayers();
+                        minPlayer.setVisible(false);
                     } else {
                         maxPlayer.setVisible(true);
                     }
@@ -107,12 +101,32 @@ public class START {
                 public void actionPerformed(ActionEvent e) {
                     if(!labels[fi].getText().equals("")) {
                         GAME.playerList.remove(fi);
+                        maxPlayer.setVisible(false);
                     }
                     ShowCurrentPlayers();
                 }
             });
             panel.add(buttons[i]);
         }
+
+        JButton startButton = new JButton("Start");
+        startButton.setBounds(GUI.width / 2 - 100, GUI.height / 2 + 200, 200, 60);
+        startButton.setBackground(Color.blue);
+        startButton.setForeground(Color.red);
+        startButton.setFocusable(false);
+        startButton.setVisible(true);
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (GAME.playerList.size() > 0) {
+                    GUI.removePanel();
+                    GUI.addPanel(BOARD.panel, BOARD.keyListener);
+                } else {
+                    minPlayer.setVisible(true);
+                }
+            }
+        });
+        panel.add(startButton);
 
 
         panel.setLayout(null);

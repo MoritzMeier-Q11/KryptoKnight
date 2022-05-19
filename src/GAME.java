@@ -11,7 +11,7 @@ public class GAME {
         STORAGE.load();
         START.ShowCurrentPlayers();
         AUDIOPLAYER.Start();
-        ANIMATION.playAnimation();
+        //ANIMATION.playAnimation();
         //playerList.add(new PLAYER("Severin", Color.black, 3, 11));
         //playerList.add(new PLAYER("Moritz", Color.orange, 3, 12));
     }

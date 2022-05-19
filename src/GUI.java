@@ -71,6 +71,7 @@ public class GUI {
             mf.add(panel);
             mf.addKeyListener(keyListener);
             stack.push(panel);
+            mf.requestFocus();
             mf.repaint();
         }
 
