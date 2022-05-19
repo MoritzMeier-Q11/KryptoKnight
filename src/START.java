@@ -132,7 +132,7 @@ public class START {
         panel.setLayout(null);
         panel.setVisible(true);
     }
-// ja
+// ja d
 
     public static void ShowCurrentPlayers() {
         for (JLabel label : labels) {
