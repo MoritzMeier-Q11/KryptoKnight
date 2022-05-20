@@ -5,6 +5,7 @@ public class MAIN {
 
         new BOARD();
         new START();
+        new PONG();
         new IMAGELOADER();
         new STORAGE();
 

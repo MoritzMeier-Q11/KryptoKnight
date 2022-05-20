@@ -23,7 +23,7 @@ public class PLAYER {
             if(i != lastPosition){
                 for (PLAYER player : GAME.playerList) {
                     if(player.position == i) {
-                                            //player überspringen
+                                            //player überspringen fehlt noch
                     }
                 }
                     options.add(i);

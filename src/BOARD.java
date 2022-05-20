@@ -2,9 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.KeyListener;
-import java.security.Key;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Random;
 
 
@@ -18,18 +16,20 @@ public class BOARD {
     public BOARD() {
         panel = new JPanel();
         panel.setVisible(true);
-        //panel.setFocusable(true);
         panel.requestFocus();
         panel.setLayout(null);
         panel.setBackground(Color.white);
         panel.setBounds(0, 0, GUI.width, GUI.height);
 
 
-
         keyListener = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                GAME.playerList.get(0).move();
+                if(e.getKeyChar() == 'p') {
+                    PONG.PlayPong();
+                } else {
+                    GAME.playerList.get(0).move();
+                }
             }
 
             @Override
