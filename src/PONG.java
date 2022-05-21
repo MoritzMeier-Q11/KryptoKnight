@@ -9,6 +9,8 @@ public class PONG {
     public static JPanel panel;
     public static KeyListener keyListener;
     public static int x, y, vx, vy, size;
+    public static int yp1, yp2;
+    public static boolean up1, down1, up2, down2;
     public static Timer timer;
 
     public PONG() {
@@ -22,25 +24,47 @@ public class PONG {
         keyListener = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if (e.getKeyCode()==KeyEvent.VK_UP)
-                {
-                    System.out.println("JA");
 
-                }
-                else if (e.getKeyCode()==KeyEvent.VK_DOWN)
-                {
-                    System.out.println("nein");
-                }
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
-
+                if (e.getKeyCode()==KeyEvent.VK_W)
+                {
+                    up1 = true;
+                }
+                else if (e.getKeyCode()==KeyEvent.VK_S)
+                {
+                    down1 = true;
+                }
+                if (e.getKeyCode()==KeyEvent.VK_UP)
+                {
+                    up2 = true;
+                }
+                else if (e.getKeyCode()==KeyEvent.VK_DOWN)
+                {
+                    down2 = true;
+                }
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-
+                if (e.getKeyCode()==KeyEvent.VK_W)
+                {
+                    up1 = false;
+                }
+                else if (e.getKeyCode()==KeyEvent.VK_S)
+                {
+                    down1 = false;
+                }
+                if (e.getKeyCode()==KeyEvent.VK_UP)
+                {
+                    up2 = false;
+                }
+                else if (e.getKeyCode()==KeyEvent.VK_DOWN)
+                {
+                    down2 = false;
+                }
             }
         };
 
@@ -77,6 +101,18 @@ public class PONG {
                 }
                 if(y <= 0 && x >= 0 && x <= GUI.width - size || y >= GUI.height - size && x >= 0 && x <= GUI.width - size) {
                     vy = -vy;
+                }
+                if(up1) {
+                    yp1 -= 2;
+                }
+                if(down1) {
+                    yp1 += 2;
+                }
+                if(up2) {
+                    yp2 -= 2;
+                }
+                if(down2) {
+                    yp2 += 2;
                 }
             }
         }, 0, 2);
