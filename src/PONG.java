@@ -22,7 +22,15 @@ public class PONG {
         keyListener = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
+                if (e.getKeyCode()==KeyEvent.VK_UP)
+                {
+                    System.out.println("JA");
 
+                }
+                else if (e.getKeyCode()==KeyEvent.VK_DOWN)
+                {
+                    System.out.println("nein");
+                }
             }
 
             @Override
@@ -78,7 +86,7 @@ public class PONG {
                 System.out.println("ja");
                 EndPong();
             }
-        }, 5000);
+        }, 5000000);
     }
 
     public static void EndPong() {
