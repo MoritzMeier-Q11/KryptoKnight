@@ -96,22 +96,28 @@ public class PONG {
             public void run() {
                 x += vx;
                 y += vy;
+                if(x <= 70 && y >= yp1 && y <= yp1 + 100 - size){
+                    System.out.println("yes");
+                }
+                if(x >= 1850 - size && y >= yp2 && y <= yp2 + 100 - size){
+                    System.out.println("no");
+                }
                 if(x <= 0 && y >= 0 && y <= GUI.height - size || x >= GUI.width - size && y >= 0 && y <= GUI.height - size) {
                     vx = -vx;
                 }
                 if(y <= 0 && x >= 0 && x <= GUI.width - size || y >= GUI.height - size && x >= 0 && x <= GUI.width - size) {
                     vy = -vy;
                 }
-                if(up1) {
+                if(up1 && yp1 > 0) {
                     yp1 -= 2;
                 }
-                if(down1) {
+                if(down1 && yp1 < 980) {
                     yp1 += 2;
                 }
-                if(up2) {
+                if(up2 && yp2 > 0) {
                     yp2 -= 2;
                 }
-                if(down2) {
+                if(down2 && yp2 < 980) {
                     yp2 += 2;
                 }
             }
