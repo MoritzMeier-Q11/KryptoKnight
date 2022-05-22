@@ -74,16 +74,22 @@ public class PONG {
         drawpong.setVisible(true);
         panel.add(drawpong);
 
-        label = new JLabel("Score :"+ Score1 , SwingConstants.CENTER);
-        label.setBounds(100, 25 + 75, 400, 50);
-        label.setBackground(Color.WHITE);
-        label.setForeground(Color.BLACK);
-        label.setFont(new Font("Arial", Font.BOLD, 30));
-        label.setOpaque(true);
-        label.setVisible(true);
-        panel.add(label);//Score.add(Score);
-        //Score.setBounds(50,50,1920,1080);
-        //Score.setText("P 1:" + Score1);
+        label1 = new JLabel("P1: " ,SwingConstants.LEFT);
+        label1.setBounds(760, 25, 200, 50);
+        label1.setBackground(Color.BLACK);
+        label1.setForeground(Color.WHITE);
+        label1.setVisible(true);
+        label1.setOpaque(true);
+        label1.setFont(new Font("Arial", Font.BOLD, 50));
+        panel.add(label1);
+        label2 = new JLabel("   P2: ",SwingConstants.LEFT);
+        label2.setBounds(960, 25, 200, 50);
+        label2.setBackground(Color.BLACK);
+        label2.setForeground(Color.WHITE);
+        label2.setVisible(true);
+        label2.setOpaque(true);
+        label2.setFont(new Font("Arial", Font.BOLD, 50));
+        panel.add(label2);
 
         x = 50;
         y = 50;
@@ -148,5 +154,8 @@ public class PONG {
         GUI.removePanel();
         GUI.addPanel(BOARD.panel, BOARD.keyListener);
     }
+
+
+
 
 }
