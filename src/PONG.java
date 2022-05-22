@@ -11,7 +11,7 @@ public class PONG {
     public static int x, y, vx, vy, size;
     public static int yp1, yp2;
     public static boolean up1, down1, up2, down2;
-    public static JLabel label1, label2;
+    public static JLabel label1, label2, win;
     public static int score1, score2;
     public static Timer timer;
 
@@ -22,7 +22,6 @@ public class PONG {
         panel.setLayout(null);
         panel.setBackground(Color.black);
         panel.setBounds(0, 0, GUI.width, GUI.height);
-        //labels = new JLabel("Score1");
 
         keyListener = new KeyListener() {
             @Override
@@ -76,22 +75,32 @@ public class PONG {
         drawpong.setVisible(true);
         panel.add(drawpong);
 
-        label1 = new JLabel("P1: 0" ,SwingConstants.LEFT);
-        label1.setBounds(760, 25, 200, 50);
+        label1 = new JLabel("testspieler: 0", SwingConstants.RIGHT);
+        label1.setBounds(410, 25, 500, 50);
         label1.setBackground(Color.BLACK);
         label1.setForeground(Color.WHITE);
         label1.setVisible(true);
         label1.setOpaque(true);
         label1.setFont(new Font("Arial", Font.BOLD, 50));
         panel.add(label1);
-        label2 = new JLabel("   P2: 0",SwingConstants.LEFT);
-        label2.setBounds(960, 25, 200, 50);
+        label2 = new JLabel("testspieler: 0", SwingConstants.LEFT);
+        label2.setBounds(1010, 25, 500, 50);
         label2.setBackground(Color.BLACK);
         label2.setForeground(Color.WHITE);
         label2.setVisible(true);
         label2.setOpaque(true);
         label2.setFont(new Font("Arial", Font.BOLD, 50));
         panel.add(label2);
+
+        win = new JLabel("SpielerX hat gewonnen", SwingConstants.CENTER);
+        win.setBounds(GUI.width/2 - 500, 300, 1000, 100);
+        win.setForeground(Color.RED);
+        win.setBackground(Color.BLACK);
+        win.setOpaque(true);
+        win.setVisible(false);
+        win.setFont(new Font("Arial", Font.BOLD, 70));
+        panel.add(win);
+
 
         Reset();
         size = 30;
@@ -102,24 +111,45 @@ public class PONG {
         GUI.addPanel(panel, keyListener);
 
         Reset();
+        win.setVisible(false);
+        score1 = 0;
+        score2 = 0;
+        label1.setText(GAME.playerList.get(0).name + ": " + String.valueOf(0));
+        label2.setText(GAME.playerList.get(1).name + ": " + String.valueOf(0));
         size = 30;
 
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                if (score1 >= 5) {
+                    win.setText(GAME.playerList.get(0).name + " hat gewonnen");
+                    win.setVisible(true);
+                    EndPong();
+                    timer.cancel();
+                }
+                if (score2 >= 5) {
+                    win.setText(GAME.playerList.get(1).name + " hat gewonnen");
+                    win.setVisible(true);
+                    EndPong();
+                    timer.cancel();
+                }
+
                 x += vx;
                 y += vy;
-                if(x <= 70 && y >= yp1 - size && y <= yp1 + 100){
+                //if(x >= 50 && x <= 70 && y == yp1){
+                //    vy = -vy;
+                //}
+                if(x <= 70 && x > 60 && y >= yp1 - size && y <= yp1 + 100){
                     vx = -vx;
                 }
-                if(x >= 1850 - size && y >= yp2 - size && y <= yp2 + 100){
+                if(x >= 1850 - size && x < 1860 - size && y >= yp2 - size && y <= yp2 + 100){
                     vx = -vx;
                 }
                 if(x <= 0 && y >= 0 && y <= GUI.height - size) {
                     Reset();
                     score2++;
-                    label2.setText("P2: " + String.valueOf(score2));
+                    label2.setText(GAME.playerList.get(1).name + ": " + String.valueOf(score2));
                 }
                 if(x >= GUI.width - size && y >= 0 && y <= GUI.height - size) {
                     Reset();
@@ -128,7 +158,7 @@ public class PONG {
                     vx = -2;
                     vy = 2;
                     score1++;
-                    label1.setText("P2: " + String.valueOf(score1));
+                    label1.setText(GAME.playerList.get(0).name + ": " +  String.valueOf(score1));
                 }
                 if(y <= 0 && x >= 0 && x <= GUI.width - size || y >= GUI.height - size && x >= 0 && x <= GUI.width - size) {
                     vy = -vy;
@@ -147,19 +177,19 @@ public class PONG {
                 }
             }
         }, 0, 2);
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("ja");
-                EndPong();
-            }
-        }, 300000);
+
     }
 
     public static void EndPong() {
-        timer.cancel();
-        GUI.removePanel();
-        GUI.addPanel(BOARD.panel, BOARD.keyListener);
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                GUI.removePanel();
+                GUI.addPanel(BOARD.panel, BOARD.keyListener);
+            }
+        }, 3000);
+
     }
 
     public static void Reset() {
@@ -168,6 +198,4 @@ public class PONG {
         vx = 2;
         vy = 2;
     }
-
-
 }

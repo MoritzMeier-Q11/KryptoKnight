@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class START {
     public static JPanel panel;
@@ -63,7 +64,8 @@ public class START {
                     e.consume();
                 if (e.getKeyChar() == KeyEvent.VK_ENTER && jTextField.getText().length() > 0) {
                     if (GAME.playerList.size() < 6) {
-                        GAME.playerList.add(new PLAYER(jTextField.getText().replaceAll("\\s", ""), Color.green, 3, 0));
+                        Random random = new Random();
+                        GAME.playerList.add(new PLAYER(jTextField.getText().replaceAll("\\s", ""), new Color(random.nextInt(0, 255), random.nextInt(0, 255), random.nextInt(0, 255)), 3, 0));
                         jTextField.setText("");
                         ShowCurrentPlayers();
                         minPlayer.setVisible(false);

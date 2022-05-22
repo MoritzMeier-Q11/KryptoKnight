@@ -27,21 +27,34 @@ public class BOARD {
             public void keyTyped(KeyEvent e) {
                 if(e.getKeyChar() == 'p') {
                     PONG.PlayPong();
-                } else {
-                    GAME.playerList.get(0).move();
                 }
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_1:
+                switch (e.getKeyChar()) {
+                    case '1':
                             GAME.playerList.get(0).move();
                         break;
-                    case KeyEvent.VK_2:
-                        if (GAME.playerList.size() >= 1) {
+                    case '2':
+                        if (GAME.playerList.size() > 1) {
                             GAME.playerList.get(1).move();
                         }
                         break;
-                    case KeyEvent.VK_3:
-                        if (GAME.playerList.size() >= 2) {
+                    case '3':
+                        if (GAME.playerList.size() > 2) {
                             GAME.playerList.get(2).move();
+                        }
+                        break;
+                    case '4':
+                        if (GAME.playerList.size() > 3) {
+                            GAME.playerList.get(3).move();
+                        }
+                        break;
+                    case '5':
+                        if (GAME.playerList.size() > 4) {
+                            GAME.playerList.get(4).move();
+                        }
+                        break;
+                    case '6':
+                        if (GAME.playerList.size() > 5) {
+                            GAME.playerList.get(5).move();
                         }
                         break;
                 }

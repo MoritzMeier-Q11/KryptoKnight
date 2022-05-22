@@ -10,5 +10,6 @@ public class MAIN {
         new STORAGE();
 
         new GAME();
+
     }
 }
