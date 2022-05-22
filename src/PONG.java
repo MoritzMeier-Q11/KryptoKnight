@@ -177,7 +177,16 @@ public class PONG {
                 }
             }
         }, 0, 2);
-
+        Timer end = new Timer();
+        end.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                win.setText("Unentschieden!");
+                win.setVisible(true);
+                EndPong();
+                timer.cancel();
+            }
+        }, 300000);
     }
 
     public static void EndPong() {
