@@ -20,6 +20,7 @@ public class PONG {
         panel.setLayout(null);
         panel.setBackground(Color.black);
         panel.setBounds(0, 0, GUI.width, GUI.height);
+        //labels = new JLabel("Score1");
 
         keyListener = new KeyListener() {
             @Override
@@ -72,6 +73,17 @@ public class PONG {
         drawpong.setBounds(0, 0, GUI.width, GUI.height);
         drawpong.setVisible(true);
         panel.add(drawpong);
+
+        label = new JLabel("Score :"+ Score1 , SwingConstants.CENTER);
+        label.setBounds(100, 25 + 75, 400, 50);
+        label.setBackground(Color.WHITE);
+        label.setForeground(Color.BLACK);
+        label.setFont(new Font("Arial", Font.BOLD, 30));
+        label.setOpaque(true);
+        label.setVisible(true);
+        panel.add(label);//Score.add(Score);
+        //Score.setBounds(50,50,1920,1080);
+        //Score.setText("P 1:" + Score1);
 
         x = 50;
         y = 50;
@@ -128,7 +140,7 @@ public class PONG {
                 System.out.println("ja");
                 EndPong();
             }
-        }, 5000000);
+        }, 300000);
     }
 
     public static void EndPong() {

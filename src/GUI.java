@@ -67,7 +67,7 @@ public class GUI {
 
     }
 
-        public static void addPanel (JPanel panel, KeyListener keyListener){
+        public static void addPanel (JPanel panel, KeyListener keyListener) {
             mf.add(panel);
             mf.addKeyListener(keyListener);
             stack.push(panel);
