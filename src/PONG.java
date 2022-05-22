@@ -137,9 +137,12 @@ public class PONG {
 
                 x += vx;
                 y += vy;
-                //if(x >= 50 && x <= 70 && y == yp1){
-                //    vy = -vy;
-                //}
+                if(x >= 50 && x <= 70 && y - 30 == yp1 || x >= 50 && x <= 70 && y == yp1 + 100 ){
+                    vy = -vy;
+                }
+                if(x >= 1850 && x <= 1870 && y - 30 == yp2 || x >= 50 && x <= 70 && y == yp2 + 100 ){
+                    vy = -vy;
+                }
                 if(x <= 70 && x > 60 && y >= yp1 - size && y <= yp1 + 100){
                     vx = -vx;
                 }
