@@ -153,8 +153,8 @@ public class PONG {
                 }
                 if(x >= GUI.width - size && y >= 0 && y <= GUI.height - size) {
                     Reset();
-                    x = 1620;
-                    y = 300;
+                    x = 945;
+                    y = 525;
                     vx = -2;
                     vy = 2;
                     score1++;
@@ -193,8 +193,8 @@ public class PONG {
     }
 
     public static void Reset() {
-        x = 300;
-        y = 300;
+        x = 945;
+        y = 525;
         vx = 2;
         vy = 2;
     }
