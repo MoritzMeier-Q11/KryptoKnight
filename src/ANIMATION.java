@@ -12,7 +12,7 @@ public class ANIMATION
         animationImageCount = 0;
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                if(animationImageCount < 117) {
+                if(animationImageCount < 118) {
                     animationImageCount++;
                 }
 

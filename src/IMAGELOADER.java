@@ -9,14 +9,15 @@ public class IMAGELOADER {
 
 
     public IMAGELOADER() {
-        startAnimation = new BufferedImage[118];
+        startAnimation = new BufferedImage[119];
         try {
             icon = ImageIO.read(new File("rcs/icon.png"));
             map = ImageIO.read(new File("rcs/map.png"));
             player = ImageIO.read(new File("rcs/player.png"));
-            //for (int i = 1; i < 118; i++) {
-            //    startAnimation[i] = ImageIO.read(new File("rcs/StartAnimation/Start-" + String.valueOf(i) + ".png"));
-            //}
+            for (int i = 1; i < 118; i++) {
+                startAnimation[i] = ImageIO.read(new File("rcs/StartAnimation/Start-" + String.valueOf(i) + ".png"));
+            }
+            startAnimation[118] = icon;
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("image loading error");
