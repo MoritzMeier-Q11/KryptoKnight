@@ -10,7 +10,7 @@ public class GAME {
         playerList = new ArrayList<>();
         STORAGE.load();
         START.ShowCurrentPlayers();
-        ANIMATION.playAnimation();
+        //ANIMATION.playAnimation();
         AUDIOPLAYER.Start();
         //playerList.add(new PLAYER("Severin", Color.black, 3, 11));
         //playerList.add(new PLAYER("Moritz", Color.orange, 3, 12));
