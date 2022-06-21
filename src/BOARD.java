@@ -28,6 +28,9 @@ public class BOARD {
                 if(e.getKeyChar() == 'p') {
                     PONG.PlayPong();
                 }
+                if(e.getKeyChar() == 's') {
+                    SNAKEGAME.PlaySnake();
+                }
                 switch (e.getKeyChar()) {
                     case '1':
                             GAME.playerList.get(0).move();

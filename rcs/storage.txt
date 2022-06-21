@@ -1,6 +1,6 @@
-Paul	112	105	88	3	13	
-Benedikt	123	190	193	3	11	
-Leonard	70	236	186	3	11	
+Paul	112	105	88	3	19	
+Benedikt	123	190	193	3	5	
+Leonard	70	236	186	3	0	
 Emma	13	190	158	3	11	
 HerrHieme	242	175	94	3	11	
 Lukas	144	8	187	3	11	
