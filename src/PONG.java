@@ -117,79 +117,109 @@ public class PONG {
         label1.setText(GAME.playerList.get(0).name + ": " + String.valueOf(0));
         label2.setText(GAME.playerList.get(1).name + ": " + String.valueOf(0));
         size = 30;
+        if(GAME.playerList.size() <= 3){
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    if (score1 >= 5) {
+                        win.setText(GAME.playerList.get(0).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+                    if (score2 >= 5) {
+                        win.setText(GAME.playerList.get(1).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
 
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                if (score1 >= 5) {
-                    win.setText(GAME.playerList.get(0).name + " hat gewonnen");
+                    x += vx;
+                    y += vy;
+                    if (x >= 35 && x <= 55 && y - 30 == yp1 || x >= 35 && x <= 55 && y == yp1 + 100) {
+                        vy = -vy;
+                    }
+                    if (x >= 1835 && x <= 1855 && y - 30 == yp2 || x >= 1835 && x <= 1855 && y == yp2 + 100) {
+                        vy = -vy;
+                    }
+                    if (x <= 70 && x > 60 && y >= yp1 - size && y <= yp1 + 100) {
+                        vx = -vx;
+                    }
+                    if (x >= 1850 - size && x < 1860 - size && y >= yp2 - size && y <= yp2 + 100) {
+                        vx = -vx;
+                    }
+                    if (x <= 0 && y >= 0 && y <= GUI.height - size) {
+                        Reset();
+                        score2++;
+                        label2.setText(GAME.playerList.get(1).name + ": " + String.valueOf(score2));
+                    }
+                    if (x >= GUI.width - size && y >= 0 && y <= GUI.height - size) {
+                        Reset();
+                        x = 945;
+                        y = 525;
+                        vx = -2;
+                        vy = 2;
+                        score1++;
+                        label1.setText(GAME.playerList.get(0).name + ": " + String.valueOf(score1));
+                    }
+                    if (y <= 0 && x >= 0 && x <= GUI.width - size || y >= GUI.height - size && x >= 0 && x <= GUI.width - size) {
+                        vy = -vy;
+                    }
+                    if (up1 && yp1 > 0) {
+                        yp1 -= 2;
+                    }
+                    if (down1 && yp1 < 980) {
+                        yp1 += 2;
+                    }
+                    if (up2 && yp2 > 0) {
+                        yp2 -= 2;
+                    }
+                    if (down2 && yp2 < 980) {
+                        yp2 += 2;
+                    }
+                }
+            }, 0, 2);
+            Timer end = new Timer();
+            end.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    win.setText("Unentschieden!");
                     win.setVisible(true);
                     EndPong();
                     timer.cancel();
                 }
-                if (score2 >= 5) {
-                    win.setText(GAME.playerList.get(1).name + " hat gewonnen");
+            }, 300000);
+        } else if(GAME.playerList.size() == 4) {
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    if (score1 >= 5) {
+                        win.setText(GAME.playerList.get(0).name + " + " + GAME.playerList.get(2).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+                    if (score2 >= 5) {
+                        win.setText(GAME.playerList.get(1).name + " + " + GAME.playerList.get(3).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+                }
+            }, 0, 2);
+            Timer end = new Timer();
+            end.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    win.setText("Unentschieden!");
                     win.setVisible(true);
                     EndPong();
                     timer.cancel();
                 }
-
-                x += vx;
-                y += vy;
-                if(x >= 35 && x <= 55 && y - 30 == yp1 || x >= 35 && x <= 55 && y == yp1 + 100 ){
-                    vy = -vy;
-                }
-                if(x >= 1835 && x <= 1855 && y - 30 == yp2 || x >= 1835 && x <= 1855 && y == yp2 + 100 ){
-                    vy = -vy;
-                }
-                if(x <= 70 && x > 60 && y >= yp1 - size && y <= yp1 + 100){
-                    vx = -vx;
-                }
-                if(x >= 1850 - size && x < 1860 - size && y >= yp2 - size && y <= yp2 + 100){
-                    vx = -vx;
-                }
-                if(x <= 0 && y >= 0 && y <= GUI.height - size) {
-                    Reset();
-                    score2++;
-                    label2.setText(GAME.playerList.get(1).name + ": " + String.valueOf(score2));
-                }
-                if(x >= GUI.width - size && y >= 0 && y <= GUI.height - size) {
-                    Reset();
-                    x = 945;
-                    y = 525;
-                    vx = -2;
-                    vy = 2;
-                    score1++;
-                    label1.setText(GAME.playerList.get(0).name + ": " +  String.valueOf(score1));
-                }
-                if(y <= 0 && x >= 0 && x <= GUI.width - size || y >= GUI.height - size && x >= 0 && x <= GUI.width - size) {
-                    vy = -vy;
-                }
-                if(up1 && yp1 > 0) {
-                    yp1 -= 2;
-                }
-                if(down1 && yp1 < 980) {
-                    yp1 += 2;
-                }
-                if(up2 && yp2 > 0) {
-                    yp2 -= 2;
-                }
-                if(down2 && yp2 < 980) {
-                    yp2 += 2;
-                }
-            }
-        }, 0, 2);
-        Timer end = new Timer();
-        end.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                win.setText("Unentschieden!");
-                win.setVisible(true);
-                EndPong();
-                timer.cancel();
-            }
-        }, 300000);
+            }, 300000);
+        }
     }
 
     public static void EndPong() {
