@@ -17,7 +17,7 @@ public class DRAWPONG extends JLabel {
             g.fillRect(1850, PONG.yp3, 20, 50);
             g.fillRect(1850, PONG.yp4 + 50, 20, 50);
         } else if (GAME.playerList.size() > 4) {
-            g.fillOval(420 ,0, GUI.height, GUI.height);
+            g.drawOval(420 ,0, GUI.height, GUI.height);
         }
         repaint();
     }
