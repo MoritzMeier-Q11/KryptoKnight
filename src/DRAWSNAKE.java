@@ -13,5 +13,22 @@ public class DRAWSNAKE extends JLabel {
         for(int i = 1; i < GUI.width/30; i++) {
             g.drawLine(i*30, 0, i*30, GUI.height);
         }
+        g.setColor(Color.yellow);
+        for (int i = 0; i < SNAKEGAME.matrix.length; i++) {
+            for (int j = 0; j < SNAKEGAME.matrix[i].length; j++) {
+                if (SNAKEGAME.matrix[i][j] != -1){
+                    switch (SNAKEGAME.matrix[i][j]) {
+                        case 1:
+                            g.setColor(GAME.playerList.get((SNAKEGAME.matrix[i][j]-1)/2).color);
+                            break;
+                        case 3:
+                            g.setColor(GAME.playerList.get((SNAKEGAME.matrix[i][j]-1)/2).color);
+                            break;
+                    }
+                    g.fillRect(i *30, j* 30, 30, 30);
+                }
+            }
+        }
+        repaint();
     }
 }

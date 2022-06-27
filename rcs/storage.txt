@@ -1,4 +1,4 @@
-Paul	112	105	88	3	19	
-Benedikt	123	190	193	3	5	
+Paul	112	105	88	3	9	
+Benedikt	123	190	193	3	6	
 Leonard	70	236	186	3	0	
 Emma	13	190	158	3	11	
