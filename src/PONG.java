@@ -230,13 +230,13 @@ public class PONG {
                 @Override
                 public void run() {
                     if (score1 >= 5) {
-                        win.setText(GAME.playerList.get(0).name + " & " + GAME.playerList.get(1).name + " hat gewonnen");
+                        win.setText("Team 1 hat gewonnen");
                         win.setVisible(true);
                         EndPong();
                         timer.cancel();
                     }
                     if (score2 >= 5) {
-                        win.setText(GAME.playerList.get(2).name + " & " + GAME.playerList.get(3).name + " hat gewonnen");
+                        win.setText("Team 2 hat gewonnen");
                         win.setVisible(true);
                         EndPong();
                         timer.cancel();
@@ -303,13 +303,32 @@ public class PONG {
             end.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    win.setText("Unentschieden!");
-                    win.setVisible(true);
+                    if(score1 == score2)
+                    {
+                        win.setText("Unentschieden!");
+                        win.setVisible(true);
+                    }
+                    else if(score1 > score2)
+                    {
+                        win.setText("Team 1 hat gewonnen");
+                        win.setVisible(true);
+                    }
+                    else
+                    {
+                        win.setText("Team 2 hat gewonnen");
+                        win.setVisible(true);
+                    }
                     EndPong();
                     timer.cancel();
                 }
             }, 300000);
         }
+        else if(GAME.playerList.size() > 4) {
+            label1.setText(GAME.playerList.get(0).name + ": " + String.valueOf(0));
+            label2.setText(GAME.playerList.get(1).name + ": " + String.valueOf(0));
+            timer = new Timer();
+        }
+
     }
 
     public static void EndPong() {
