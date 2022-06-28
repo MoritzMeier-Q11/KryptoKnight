@@ -11,7 +11,7 @@ public class PONG {
     public static int x, y, vx, vy, size;
     public static int yp1, yp2, yp3, yp4;
     public static boolean up1, down1, up2, down2, up3, down3, up4, down4;
-    public static JLabel label1, label2, win;
+    public static JLabel label1, label2, label3, label4, label5, label6, win;
     public static int score1, score2;
     public static Timer timer;
 
@@ -123,6 +123,38 @@ public class PONG {
         label2.setOpaque(true);
         label2.setFont(new Font("Arial", Font.BOLD, 50));
         panel.add(label2);
+        label1 = new JLabel("testspieler: 0", SwingConstants.RIGHT);
+        label1.setBounds(410, 25, 500, 50);
+        label1.setBackground(Color.BLACK);
+        label1.setForeground(Color.WHITE);
+        label1.setVisible(true);
+        label1.setOpaque(true);
+        label1.setFont(new Font("Arial", Font.BOLD, 50));
+        panel.add(label1);
+        label2 = new JLabel("testspieler: 0", SwingConstants.LEFT);
+        label2.setBounds(1010, 25, 500, 50);
+        label2.setBackground(Color.BLACK);
+        label2.setForeground(Color.WHITE);
+        label2.setVisible(true);
+        label4.setOpaque(true);
+        label4.setFont(new Font("Arial", Font.BOLD, 50));
+        panel.add(label2);
+        label5 = new JLabel("testspieler: 0", SwingConstants.RIGHT);
+        label5.setBounds(410, 25, 500, 50);
+        label5.setBackground(Color.BLACK);
+        label5.setForeground(Color.WHITE);
+        label5.setVisible(true);
+        label5.setOpaque(true);
+        label5.setFont(new Font("Arial", Font.BOLD, 50));
+        panel.add(label1);
+        label6 = new JLabel("testspieler: 0", SwingConstants.LEFT);
+        label6.setBounds(1010, 25, 500, 50);
+        label6.setBackground(Color.BLACK);
+        label6.setForeground(Color.WHITE);
+        label6.setVisible(true);
+        label6.setOpaque(true);
+        label6.setFont(new Font("Arial", Font.BOLD, 50));
+        panel.add(label6);
 
         win = new JLabel("SpielerX hat gewonnen", SwingConstants.CENTER);
         win.setBounds(GUI.width/2 - 500, 300, 1000, 100);
@@ -230,13 +262,13 @@ public class PONG {
                 @Override
                 public void run() {
                     if (score1 >= 5) {
-                        win.setText(GAME.playerList.get(0).name + " & " + GAME.playerList.get(1).name + " hat gewonnen");
+                        win.setText("Team 1 hat gewonnen");
                         win.setVisible(true);
                         EndPong();
                         timer.cancel();
                     }
                     if (score2 >= 5) {
-                        win.setText(GAME.playerList.get(2).name + " & " + GAME.playerList.get(3).name + " hat gewonnen");
+                        win.setText("Team 2 hat gewonnen");
                         win.setVisible(true);
                         EndPong();
                         timer.cancel();
@@ -303,13 +335,32 @@ public class PONG {
             end.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    win.setText("Unentschieden!");
-                    win.setVisible(true);
+                    if(score1 == score2)
+                    {
+                        win.setText("Unentschieden!");
+                        win.setVisible(true);
+                    }
+                    else if(score1 > score2)
+                    {
+                        win.setText("Team 1 hat gewonnen");
+                        win.setVisible(true);
+                    }
+                    else
+                    {
+                        win.setText("Team 2 hat gewonnen");
+                        win.setVisible(true);
+                    }
                     EndPong();
                     timer.cancel();
                 }
             }, 300000);
         }
+        else if(GAME.playerList.size() > 4) {
+            label1.setText(GAME.playerList.get(0).name + ": " + String.valueOf(0));
+            label2.setText(GAME.playerList.get(1).name + ": " + String.valueOf(0));
+            timer = new Timer();
+        }
+
     }
 
     public static void EndPong() {

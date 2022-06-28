@@ -11,12 +11,13 @@ public class DRAWPONG extends JLabel {
         if (GAME.playerList.size() <= 3) {
             g.fillRect(50, PONG.yp1, 20, 100);
             g.fillRect(1850, PONG.yp2, 20, 100);
-        }
-        else if (GAME.playerList.size() == 4) {
+        } else if (GAME.playerList.size() == 4) {
             g.fillRect(50, PONG.yp1, 20, 50);
             g.fillRect(50, PONG.yp2 + 50, 20, 50);
             g.fillRect(1850, PONG.yp3, 20, 50);
             g.fillRect(1850, PONG.yp4 + 50, 20, 50);
+        } else if (GAME.playerList.size() > 4) {
+            g.drawOval(420 ,0, GUI.height, GUI.height);
         }
         repaint();
     }
