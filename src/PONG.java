@@ -376,9 +376,16 @@ public class PONG {
     }
 
     public static void Reset() {
-        x = 945;
-        y = 525;
-        vx = 2;
-        vy = 2;
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                x = 945;
+                y = 525;
+                vx = 2;
+                vy = 2;
+            }
+        }, 300);
+
     }
 }
