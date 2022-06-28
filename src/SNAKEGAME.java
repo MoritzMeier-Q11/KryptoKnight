@@ -12,6 +12,7 @@ public class SNAKEGAME {
     public static JPanel panel;
     public static KeyListener keyListener;
     static HashMap<Integer, Integer> snaketest;
+    static DRAWSNAKE drawsnake;
     static SNAKE s1, s2;
 
     static int[][] matrix;
@@ -20,6 +21,8 @@ public class SNAKEGAME {
         matrix = new int[64][36];
 
         s1 = new SNAKE(5, 5, 1);
+        s1.addTale();
+
         s2 = new SNAKE(40, 20, 3);
 
 
@@ -61,7 +64,7 @@ public class SNAKEGAME {
 
             }
         };
-        DRAWSNAKE drawsnake = new DRAWSNAKE();
+        drawsnake = new DRAWSNAKE();
         drawsnake.setBounds(0, 0, GUI.width, GUI.height);
         drawsnake.setVisible(true);
         panel.add(drawsnake);
@@ -80,9 +83,16 @@ public class SNAKEGAME {
                         matrix[i][j] = -1;
                     }
                 }
+                for (int[] c: s1.coods) {
+                    matrix[c[0]][c[1]] = 1;
+                }
+                for (int[] c: s2.coods) {
+                    matrix[c[0]][c[1]] = 3;
+                }
+                s1.addTale();
+                s2.addTale();
+                drawsnake.refresh();
 
-                matrix[s1.x][s1.y] = 1;
-                matrix[s2.x][s2.y] = 3;
             }
         }, 200, 100);
         //EndSnake();

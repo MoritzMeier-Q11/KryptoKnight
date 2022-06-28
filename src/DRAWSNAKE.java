@@ -29,6 +29,9 @@ public class DRAWSNAKE extends JLabel {
                 }
             }
         }
+    }
+    public void refresh() {
         repaint();
+
     }
 }

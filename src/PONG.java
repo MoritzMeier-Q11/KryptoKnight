@@ -136,8 +136,8 @@ public class PONG {
         label2.setBackground(Color.BLACK);
         label2.setForeground(Color.WHITE);
         label2.setVisible(true);
-        label4.setOpaque(true);
-        label4.setFont(new Font("Arial", Font.BOLD, 50));
+        label2.setOpaque(true);
+        label2.setFont(new Font("Arial", Font.BOLD, 50));
         panel.add(label2);
         label5 = new JLabel("testspieler: 0", SwingConstants.RIGHT);
         label5.setBounds(410, 25, 500, 50);
