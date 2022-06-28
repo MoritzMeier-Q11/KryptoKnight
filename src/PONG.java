@@ -9,7 +9,7 @@ public class PONG {
     public static JPanel panel;
     public static KeyListener keyListener;
     public static int x, y, vx, vy, size;
-    public static int yp1, yp2, yp3, yp4;
+    public static int yp1, yp2, yp3, yp4, xp1, xp2;
     public static boolean up1, down1, up2, down2, up3, down3, up4, down4;
     public static JLabel label1, label2, label3, label4, label5, label6, win;
     public static int score1, score2;
@@ -62,6 +62,11 @@ public class PONG {
                 else if (e.getKeyCode()==KeyEvent.VK_L)
                 {
                     down4 = true;
+                }
+                if(e.getKeyCode()==KeyEvent.VK_P)
+                {
+                    EndPong2();
+                    timer.cancel();
                 }
             }
 
@@ -374,18 +379,22 @@ public class PONG {
         }, 3000);
 
     }
-
-    public static void Reset() {
+    public static void EndPong2() {
         Timer t = new Timer();
         t.schedule(new TimerTask() {
             @Override
             public void run() {
-                x = 945;
-                y = 525;
-                vx = 2;
-                vy = 2;
+                GUI.removePanel();
+                GUI.addPanel(BOARD.panel, BOARD.keyListener);
             }
-        }, 300);
+        }, 100);
 
+    }
+
+    public static void Reset() {
+        x = 945;
+        y = 525;
+        vx = 2;
+        vy = 2;
     }
 }
