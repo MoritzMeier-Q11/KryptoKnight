@@ -12,7 +12,7 @@ public class PONG {
     public static int yp1, yp2, yp3, yp4, xp1, xp2;
     public static boolean up1, down1, up2, down2, up3, down3, up4, down4;
     public static JLabel label1, label2, label3, label4, label5, label6, win;
-    public static int score1, score2;
+    public static int score1, score2, score3, score4;
     public static Timer timer;
 
     public PONG() {
@@ -361,9 +361,60 @@ public class PONG {
             }, 300000);
         }
         else if(GAME.playerList.size() > 4) {
-            label1.setText(GAME.playerList.get(0).name + ": " + String.valueOf(0));
-            label2.setText(GAME.playerList.get(1).name + ": " + String.valueOf(0));
             timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    if (score1 >= 5) {
+                        win.setText(GAME.playerList.get(0).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+                    if (score2 >= 5) {
+                        win.setText(GAME.playerList.get(1).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+                    if (score3 >= 5) {
+                        win.setText(GAME.playerList.get(2).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+                    if (score4 >= 5) {
+                        win.setText(GAME.playerList.get(3).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+                    if (up1 && yp1 > 0) {
+                        yp1 -= 2;
+                    }
+                    if (down1 && yp1 < 930) {
+                        yp1 += 2;
+                    }
+                    if (up2 && yp2 > 50) {
+                        yp2 -= 2;
+                    }
+                    if (down2 && yp2 < 980) {
+                        yp2 += 2;
+                    }
+                    if (up3 && xp1 > 0) {
+                        xp1 -= 2;
+                    }
+                    if (down3 && xp1 < 930) {
+                        xp1 += 2;
+                    }
+                    if (up4 && xp2 > 50) {
+                        xp2 -= 2;
+                    }
+                    if (down4 && xp2 < 980) {
+                        xp2 += 2;
+                    }
+                }
+            }, 0, 2);
         }
 
     }
