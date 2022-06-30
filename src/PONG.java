@@ -9,10 +9,10 @@ public class PONG {
     public static JPanel panel;
     public static KeyListener keyListener;
     public static int x, y, vx, vy, size;
-    public static int yp1, yp2, yp3, yp4;
+    public static int yp1, yp2, yp3, yp4, xp1, xp2;
     public static boolean up1, down1, up2, down2, up3, down3, up4, down4;
     public static JLabel label1, label2, label3, label4, label5, label6, win;
-    public static int score1, score2;
+    public static int score1, score2, score3, score4;
     public static Timer timer;
 
     public PONG() {
@@ -62,6 +62,11 @@ public class PONG {
                 else if (e.getKeyCode()==KeyEvent.VK_L)
                 {
                     down4 = true;
+                }
+                if(e.getKeyCode()==KeyEvent.VK_P)
+                {
+                    EndPong2();
+                    timer.cancel();
                 }
             }
 
@@ -123,22 +128,22 @@ public class PONG {
         label2.setOpaque(true);
         label2.setFont(new Font("Arial", Font.BOLD, 50));
         panel.add(label2);
-        label1 = new JLabel("testspieler: 0", SwingConstants.RIGHT);
-        label1.setBounds(410, 25, 500, 50);
-        label1.setBackground(Color.BLACK);
-        label1.setForeground(Color.WHITE);
-        label1.setVisible(true);
-        label1.setOpaque(true);
-        label1.setFont(new Font("Arial", Font.BOLD, 50));
-        panel.add(label1);
-        label2 = new JLabel("testspieler: 0", SwingConstants.LEFT);
-        label2.setBounds(1010, 25, 500, 50);
-        label2.setBackground(Color.BLACK);
-        label2.setForeground(Color.WHITE);
-        label2.setVisible(true);
-        label2.setOpaque(true);
-        label2.setFont(new Font("Arial", Font.BOLD, 50));
-        panel.add(label2);
+        label3 = new JLabel("testspieler: 0", SwingConstants.RIGHT);
+        label3.setBounds(410, 25, 500, 50);
+        label3.setBackground(Color.BLACK);
+        label3.setForeground(Color.WHITE);
+        label3.setVisible(true);
+        label3.setOpaque(true);
+        label3.setFont(new Font("Arial", Font.BOLD, 50));
+        panel.add(label3);
+        label4 = new JLabel("testspieler: 0", SwingConstants.LEFT);
+        label4.setBounds(1010, 25, 500, 50);
+        label4.setBackground(Color.BLACK);
+        label4.setForeground(Color.WHITE);
+        label4.setVisible(true);
+        label4.setOpaque(true);
+        label4.setFont(new Font("Arial", Font.BOLD, 50));
+        panel.add(label4);
         label5 = new JLabel("testspieler: 0", SwingConstants.RIGHT);
         label5.setBounds(410, 25, 500, 50);
         label5.setBackground(Color.BLACK);
@@ -146,7 +151,7 @@ public class PONG {
         label5.setVisible(true);
         label5.setOpaque(true);
         label5.setFont(new Font("Arial", Font.BOLD, 50));
-        panel.add(label1);
+        panel.add(label5);
         label6 = new JLabel("testspieler: 0", SwingConstants.LEFT);
         label6.setBounds(1010, 25, 500, 50);
         label6.setBackground(Color.BLACK);
@@ -356,9 +361,60 @@ public class PONG {
             }, 300000);
         }
         else if(GAME.playerList.size() > 4) {
-            label1.setText(GAME.playerList.get(0).name + ": " + String.valueOf(0));
-            label2.setText(GAME.playerList.get(1).name + ": " + String.valueOf(0));
             timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    if (score1 >= 5) {
+                        win.setText(GAME.playerList.get(0).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+                    if (score2 >= 5) {
+                        win.setText(GAME.playerList.get(1).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+                    if (score3 >= 5) {
+                        win.setText(GAME.playerList.get(2).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+                    if (score4 >= 5) {
+                        win.setText(GAME.playerList.get(3).name + " hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+                    if (up1 && yp1 > 0) {
+                        yp1 -= 2;
+                    }
+                    if (down1 && yp1 < 930) {
+                        yp1 += 2;
+                    }
+                    if (up2 && yp2 > 50) {
+                        yp2 -= 2;
+                    }
+                    if (down2 && yp2 < 980) {
+                        yp2 += 2;
+                    }
+                    if (up3 && xp1 > 0) {
+                        xp1 -= 2;
+                    }
+                    if (down3 && xp1 < 930) {
+                        xp1 += 2;
+                    }
+                    if (up4 && xp2 > 50) {
+                        xp2 -= 2;
+                    }
+                    if (down4 && xp2 < 980) {
+                        xp2 += 2;
+                    }
+                }
+            }, 0, 2);
         }
 
     }
@@ -372,6 +428,17 @@ public class PONG {
                 GUI.addPanel(BOARD.panel, BOARD.keyListener);
             }
         }, 3000);
+
+    }
+    public static void EndPong2() {
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                GUI.removePanel();
+                GUI.addPanel(BOARD.panel, BOARD.keyListener);
+            }
+        }, 100);
 
     }
 
