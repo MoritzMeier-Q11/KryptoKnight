@@ -14,17 +14,14 @@ public class SNAKEGAME {
     static HashMap<Integer, Integer> snaketest;
     static DRAWSNAKE drawsnake;
     static SNAKE s1, s2;
-
+    static ArrayList<SNAKE> snakes;
+    static int[][] spawns;
     static int[][] matrix;
 
     public SNAKEGAME() {
         matrix = new int[64][36];
-
-        s1 = new SNAKE(5, 5, 1);
-        s1.addTale();
-
-        s2 = new SNAKE(40, 20, 3);
-
+        spawns = new int[][] {{5, 30}, {5, 5}, {58, 5}, {58, 30}};
+        snakes = new ArrayList<>();
 
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
@@ -48,14 +45,26 @@ public class SNAKEGAME {
             @Override
             public void keyPressed(KeyEvent e) {
                     switch (e.getKeyCode()){
-                        case KeyEvent.VK_W -> s1.dir = 0;
-                        case KeyEvent.VK_D -> s1.dir = 1;
-                        case KeyEvent.VK_S -> s1.dir = 2;
-                        case KeyEvent.VK_A -> s1.dir = 3;
-                        case KeyEvent.VK_UP -> s2.dir = 0;
-                        case KeyEvent.VK_RIGHT -> s2.dir = 1;
-                        case KeyEvent.VK_DOWN -> s2.dir = 2;
-                        case KeyEvent.VK_LEFT -> s2.dir = 3;
+                        //player 1
+                        case KeyEvent.VK_W -> snakes.get(0).dir = 0;
+                        case KeyEvent.VK_D -> snakes.get(0).dir = 1;
+                        case KeyEvent.VK_S -> snakes.get(0).dir = 2;
+                        case KeyEvent.VK_A -> snakes.get(0).dir = 3;
+                        //player 2
+                        case KeyEvent.VK_UP -> snakes.get(1).dir = 0;
+                        case KeyEvent.VK_RIGHT -> snakes.get(1).dir = 1;
+                        case KeyEvent.VK_DOWN -> snakes.get(1).dir = 2;
+                        case KeyEvent.VK_LEFT -> snakes.get(1).dir = 3;
+                        //player 3
+                        case KeyEvent.VK_I -> snakes.get(2).dir = 0;
+                        case KeyEvent.VK_L -> snakes.get(2).dir = 1;
+                        case KeyEvent.VK_K -> snakes.get(2).dir = 2;
+                        case KeyEvent.VK_J -> snakes.get(2).dir = 3;
+                        //player 4
+                        case KeyEvent.VK_T -> snakes.get(3).dir = 0;
+                        case KeyEvent.VK_H -> snakes.get(3).dir = 1;
+                        case KeyEvent.VK_G -> snakes.get(3).dir = 2;
+                        case KeyEvent.VK_F -> snakes.get(3).dir = 3;
                     }
             }
 
@@ -70,32 +79,41 @@ public class SNAKEGAME {
         panel.add(drawsnake);
     }
     public static void PlaySnake() {
-        GUI.removePanel();
-        GUI.addPanel(panel, keyListener);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                s1.move();
-                s2.move();
-                for (int i = 0; i < matrix.length; i++) {
-                    for (int j = 0; j < matrix[i].length; j++) {
-                        matrix[i][j] = -1;
-                    }
-                }
-                for (int[] c: s1.coods) {
-                    matrix[c[0]][c[1]] = 1;
-                }
-                for (int[] c: s2.coods) {
-                    matrix[c[0]][c[1]] = 3;
-                }
-                s1.addTale();
-                s2.addTale();
-                drawsnake.refresh();
-
+        if(GAME.playerList.size() <= 4) {
+            GUI.removePanel();
+            GUI.addPanel(panel, keyListener);
+            for(PLAYER p : GAME.playerList) {
+                snakes.add(new SNAKE(spawns[snakes.size()][0], spawns[snakes.size()][1], snakes.size()));
             }
-        }, 200, 100);
-        //EndSnake();
+            for (int i = 0; i < 8; i++) {
+                for(SNAKE s : snakes) {
+                    s.addTale();
+                }
+            }
+            Timer timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    for(SNAKE s : snakes) {
+                        s.move();
+                    }
+                    for (int i = 0; i < matrix.length; i++) {
+                        for (int j = 0; j < matrix[i].length; j++) {
+                            matrix[i][j] = -1;
+                        }
+                    }
+                    for(SNAKE s : snakes) {
+                        if(s.coods != null) {
+                            for (int[] c: s.coods) {
+                                matrix[c[0]][c[1]] = snakes.indexOf(s)*2+1;
+                            }
+                        }
+                    }
+                    drawsnake.refresh();
+                }
+            }, 200, 100);
+            //EndSnake();
+        }
     }
 
     public static void EndSnake() {

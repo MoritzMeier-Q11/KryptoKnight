@@ -83,7 +83,7 @@ public class GUI {
 
         public static void removeCertainPanel (JPanel panel){
             mf.remove(panel);
-            stack.push(panel);
+            stack.remove(panel);
             mf.repaint();
         }
 
