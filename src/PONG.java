@@ -389,7 +389,14 @@ public class PONG {
                         EndPong();
                         timer.cancel();
                     }
-                    if (up1 && yp1 > 0) {
+                    if (Math.pow(x, 2) + Math.pow(y, 2) >= 235255){
+                        double phi = Math.acos((-vx*x+vy*y)/((Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)))*(Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)))));
+                        System.out.println(phi);
+
+                    }
+                    x += vx;
+                    y += vy;
+                    /*if (up1 && yp1 > 0) {
                         yp1 -= 2;
                     }
                     if (down1 && yp1 < 930) {
@@ -443,8 +450,10 @@ public class PONG {
     }
 
     public static void Reset() {
-        x = 945;
-        y = 525;
+        //x = 945;
+        //y = 525;
+        x = 0;
+        y = 0;
         vx = 2;
         vy = 2;
     }
