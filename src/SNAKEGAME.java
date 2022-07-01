@@ -133,7 +133,6 @@ public class SNAKEGAME {
                                 }
                             }
                         }
-                        System.out.println(GAME.playerList.get(snakes.indexOf(winner)).name);
                         win.setText(GAME.playerList.get(snakes.indexOf(winner)).name + " hat gewonnen");
                         win.setVisible(true);
                         EndSnake();

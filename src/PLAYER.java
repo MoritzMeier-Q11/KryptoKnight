@@ -23,10 +23,13 @@ public class PLAYER {
             if(i != lastPosition){
                 for (PLAYER player : GAME.playerList) {
                     if(player.position == i) {
-                                            //player überspringen fehlt noch
+                        lastPosition = position;
+                        position = i;
+                        move();
+                        return;
                     }
                 }
-                    options.add(i);
+                options.add(i);
             }
         }
         lastPosition = position;
