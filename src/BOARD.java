@@ -12,6 +12,7 @@ public class BOARD {
     public static JPanel panel;
     public static KeyListener keyListener;
     public static Color[] colors;
+    public static JLabel drawdice;
 
     public BOARD() {
         panel = new JPanel();
@@ -30,6 +31,18 @@ public class BOARD {
                 }
                 if(e.getKeyChar() == 's') {
                     SNAKEGAME.PlaySnake();
+                }
+                if(e.getKeyChar() == 'd') {
+                    int value = new Random().nextInt(1, 7);
+                    drawdice.setText(String.valueOf(value));
+                    drawdice.setVisible(true);
+                    for (int i = 0; i < value; i++) {
+                        GAME.playerList.get(GAME.currentPlayer).move();
+                    }
+                    GAME.NextPlayer();
+                }
+                if(e.getKeyChar() == 'h') {
+                    drawdice.setVisible(false);
                 }
                 switch (e.getKeyChar()) {
                     case '1':
@@ -84,10 +97,22 @@ public class BOARD {
         createFields();
         createEdges();
 
+        drawdice = new JLabel("", SwingConstants.CENTER);
+        drawdice.setBounds(GUI.width/2 - 150, GUI.height/2 - 150, 300, 300);
+        drawdice.setForeground(Color.BLACK);
+        drawdice.setBackground(Color.white);
+        drawdice.setOpaque(true);
+        drawdice.setVisible(false);
+        drawdice.setFont(new Font("Arial", Font.BOLD, 70));
+        panel.add(drawdice);
+
         DRAWBOARD drawboard = new DRAWBOARD();
         drawboard.setBounds(0, 0, GUI.width, GUI.height);
         drawboard.setVisible(true);
         panel.add(drawboard);
+
+
+
     }
 
     public static void createFields(){
