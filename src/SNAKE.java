@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class SNAKE {
     int x, y, dir;
+    boolean alive;
     ArrayList<int[]> coods;
     public SNAKE(int x, int y, int dir) {
         this.x = x;
@@ -9,9 +10,7 @@ public class SNAKE {
         this.dir = dir;
         coods = new ArrayList<>(64*36);
         coods.add(new int[]{x, y});
-    }
-    public void ChangeDir(int dir) {
-        this.dir = dir;
+        alive = true;
     }
     public void move() {
         if(coods!=null) {
@@ -50,13 +49,27 @@ public class SNAKE {
                 }
 
             }
-            if(SNAKEGAME.matrix[coods.get(0)[0]][coods.get(0)[1]] != -1) {
-                coods = null;
+            int facing = SNAKEGAME.matrix[coods.get(0)[0]][coods.get(0)[1]];
+            if(facing != -1) {
+                if(facing == 100) {
+                    addTale();
+                    if(SNAKEGAME.apples.size() <= 5) {
+                        SNAKEGAME.SpawnApple();
+                    }
+                    SNAKEGAME.apples.removeIf(a -> a.x == coods.get(0)[0] && a.y == coods.get(0)[1]);
+                } else {
+                    alive = false;
+                    SNAKEGAME.playerCount--;
+                    for(int[] c : coods) {
+                        APPLE a = new APPLE(c[0], c[1]);
+                        SNAKEGAME.apples.add(a);
+                    }
+                    coods = null;
+                }
             }
         }
     }
     public void addTale() {
         coods.add(new int[]{coods.get(coods.size()-1)[0], coods.get(coods.size()-1)[1]});
     }
-
 }

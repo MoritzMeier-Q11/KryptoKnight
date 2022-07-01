@@ -35,6 +35,7 @@ public class DRAWBOARD extends JLabel {
             if (player != null) {
                 g.setColor(player.color);
                 g.drawOval(BOARD.fields[player.position].x -10, BOARD.fields[player.position].y -10, 70, 70);
+                g.drawImage(IMAGELOADER.livAvatar,BOARD.fields[player.position].x -10, BOARD.fields[player.position].y -10, 70, 70, null);
             }
         }
 

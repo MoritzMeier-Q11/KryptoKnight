@@ -1,2 +1,4 @@
 Paul	112	105	88	3	18	
-Benedikt	123	190	193	3	12	
+Benedikt	123	190	193	3	2	
+Moritz	94	117	123	3	15	
+Daniel	230	55	246	3	5	
