@@ -174,7 +174,69 @@ public class PONG {
         Reset();
         size = 30;
     }
+    public static void PlayCircle() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (score1 >= 5) {
+                    win.setText(GAME.playerList.get(0).name + " hat gewonnen");
+                    win.setVisible(true);
+                    EndPong();
+                    timer.cancel();
+                }
+                if (score2 >= 5) {
+                    win.setText(GAME.playerList.get(1).name + " hat gewonnen");
+                    win.setVisible(true);
+                    EndPong();
+                    timer.cancel();
+                }
+                if (score3 >= 5) {
+                    win.setText(GAME.playerList.get(2).name + " hat gewonnen");
+                    win.setVisible(true);
+                    EndPong();
+                    timer.cancel();
+                }
+                if (score4 >= 5) {
+                    win.setText(GAME.playerList.get(3).name + " hat gewonnen");
+                    win.setVisible(true);
+                    EndPong();
+                    timer.cancel();
+                }
+                if (Math.pow(x, 2) + Math.pow(y, 2) >= 235255){
+                    double phi = Math.acos((-vx*x+vy*y)/((Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)))*(Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)))));
+                    System.out.println(phi);
 
+                }
+                x += vx;
+                y += vy;
+                    /*if (up1 && yp1 > 0) {
+                        yp1 -= 2;
+                    }
+                    if (down1 && yp1 < 930) {
+                        yp1 += 2;
+                    }
+                    if (up2 && yp2 > 50) {
+                        yp2 -= 2;
+                    }
+                    if (down2 && yp2 < 980) {
+                        yp2 += 2;
+                    }
+                    if (up3 && xp1 > 0) {
+                        xp1 -= 2;
+                    }
+                    if (down3 && xp1 < 930) {
+                        xp1 += 2;
+                    }
+                    if (up4 && xp2 > 50) {
+                        xp2 -= 2;
+                    }
+                    if (down4 && xp2 < 980) {
+                        xp2 += 2;
+                    }*/
+            }
+        }, 0, 2);
+    }
     public static void PlayPong() {
         GUI.removePanel();
         GUI.addPanel(panel, keyListener);
@@ -360,6 +422,7 @@ public class PONG {
                 }
             }, 300000);
         }
+
         else if(GAME.playerList.size() > 4) {
             timer = new Timer();
             timer.scheduleAtFixedRate(new TimerTask() {
