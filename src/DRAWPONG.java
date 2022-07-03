@@ -7,7 +7,7 @@ public class DRAWPONG extends JLabel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(Color.white);
-        g.fillOval(PONG.x, PONG.y, PONG.size, PONG.size);
+        g.fillOval((int)Math.round(PONG.x), (int)Math.round(PONG.y), PONG.size, PONG.size);
         if (GAME.playerList.size() <= 3) {
             g.fillRect(50, PONG.yp1, 20, 100);
             g.setColor(GAME.playerList.get(0).color);
@@ -23,7 +23,7 @@ public class DRAWPONG extends JLabel {
             g.fillRect(1850, PONG.yp4 + 50, 20, 50);
         } else if (GAME.playerList.size() > 4) {
             g.setColor(Color.white);
-            g.fillOval(PONG.x+GUI.width/2-15, PONG.y+GUI.height/2-15, PONG.size, PONG.size);
+            g.fillOval((int)Math.round(PONG.x)+GUI.width/2-15, -(int)Math.round(PONG.y)+GUI.height/2-15, PONG.size, PONG.size);
             g.drawOval(GUI.width/2-500 ,GUI.height/2-500, GUI.height - 80, GUI.height - 80);
             g.setColor(GAME.playerList.get(0).color);
             g.fillRect(510, PONG.yp1, 20, 100);

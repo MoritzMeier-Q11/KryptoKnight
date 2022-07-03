@@ -8,7 +8,8 @@ import java.util.TimerTask;
 public class PONG {
     public static JPanel panel;
     public static KeyListener keyListener;
-    public static int x, y, vx, vy, size;
+    public static double x, y, vx, vy;
+    public static int size;
     public static int yp1, yp2, yp3, yp4, xp1, xp2;
     public static boolean up1, down1, up2, down2, up3, down3, up4, down4;
     public static JLabel label1, label2, label3, label4, label5, label6, win;
@@ -175,6 +176,12 @@ public class PONG {
         size = 30;
     }
     public static void PlayCircle() {
+        GUI.removePanel();
+        GUI.addPanel(panel, keyListener);
+        x = 0;
+        y = 300;
+        vx = -4;
+        vy = 0;
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -204,8 +211,13 @@ public class PONG {
                     timer.cancel();
                 }
                 if (Math.pow(x, 2) + Math.pow(y, 2) >= 235255){
-                    double phi = Math.acos((-vx*x+vy*y)/((Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)))*(Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)))));
-                    System.out.println(phi);
+                    double phi = Math.acos((vx*x+vy*y)/((Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)))*(Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)))));
+                    System.out.println(x + "  " + y + "  " + phi + "  " + vx + "  " + vy);
+                    double vxNeu = Math.round(vx*Math.cos(Math.PI - 2*phi) - vy*Math.sin(Math.PI - 2*phi));
+                    vy = Math.round(vx*Math.sin(Math.PI - 2*phi) + vy*Math.cos(Math.PI - 2*phi));
+                    vx = vxNeu;
+                    System.out.println(x + "  " + y + "  " + phi + "  " + vx + "  " + vy);
+                    System.out.println(Math.acos((vx*x+vy*y)/((Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)))*(Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2))))));
 
                 }
                 x += vx;
@@ -453,13 +465,16 @@ public class PONG {
                         timer.cancel();
                     }
                     if (Math.pow(x, 2) + Math.pow(y, 2) >= 235255){
-                        double phi = Math.acos((-vx*x+vy*y)/((Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)))*(Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)))));
-                        System.out.println(phi);
-
+                        double phi = Math.acos((vx*x+vy*y)/((Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)))*(Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2)))));
+                        vx = Math.round(vx*Math.cos(Math.PI - 2*phi) - vy*Math.sin(Math.PI - 2*phi));
+                        vy = Math.round(vx*Math.sin(Math.PI - 2*phi) + vy*Math.cos(Math.PI - 2*phi));
+                        System.out.println(x + "  " + y + "  " + phi + "  " + vx + "  " + vy);
+                        System.out.println(Math.acos((vx*x+vy*y)/((Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)))*(Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2))))));
+                        System.out.println("f");
                     }
                     x += vx;
                     y += vy;
-                    /*if (up1 && yp1 > 0) {
+                    if (up1 && yp1 > 0) {
                         yp1 -= 2;
                     }
                     if (down1 && yp1 < 930) {
@@ -517,7 +532,7 @@ public class PONG {
         //y = 525;
         x = 0;
         y = 0;
-        vx = 2;
-        vy = 2;
+        vx = 1;
+        vy = 1;
     }
 }
