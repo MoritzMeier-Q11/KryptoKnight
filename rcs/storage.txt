@@ -1,3 +1,5 @@
-Moritz	68	244	129	3	12	
-Franziska	28	51	14	3	1	
-test	208	229	92	3	19	
+Paul	112	105	88	3	0	
+Benedikt	123	190	193	3	17	
+Moritz	171	29	51	3	19	
+Severin	45	54	208	3	11	
+t	244	193	18	3	11	
