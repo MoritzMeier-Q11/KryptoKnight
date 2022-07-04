@@ -28,7 +28,7 @@ public class JUMPYGAME {
         rounds = 0;
         multiplier = 0.7;
         activePlayers = 0;
-        runtime = new Timer();
+        runtime = null;
 
         panel = new JPanel();
         panel.setVisible(true);
@@ -91,6 +91,7 @@ public class JUMPYGAME {
     public static void PlayJumpy() {
         clean();
         prep();
+        runtime = new Timer();
         drawjumpy.refresh();
         runtime.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -103,12 +104,19 @@ public class JUMPYGAME {
                 drawjumpy.refresh();
 
                 if (activePlayers <= 0) {
-                    runtime.cancel();
                     System.out.println("Winner is PlayerX");
                     EndJumpy();
                 }
             }
         }, 50, 40);
+    }
+
+    public static void clean(){
+        hurdleGenerated = false;
+        hurdlePosition = 0;
+        hurdleHeight = 0;
+        rounds = 0;
+        multiplier = 0.7;
     }
 
     public static void prep(){
@@ -132,13 +140,13 @@ public class JUMPYGAME {
             hurdlePosition = 100;
             hurdleHeight = 15;
         }
-        else if(hurdlePosition < 3){
+        else if (hurdlePosition < 3){
             rounds++;
             hurdleGenerated = false;
             hurdleHeight = 0;
         }
         else {
-            if( hurdlePosition-(1*multiplier)<16.6 && hurdlePosition>16.6){
+            if (hurdlePosition-(1*multiplier)<16.6 && hurdlePosition>16.6){
                 for(JUMPYPLAYER j : players) {
                 //check for collision
                     if (j.jumpHeight <= hurdleHeight && j.isActive){
@@ -160,13 +168,6 @@ public class JUMPYGAME {
         }
     }
 
-    public static void clean(){
-        hurdleGenerated = false;
-        hurdlePosition = 0;
-        hurdleHeight = 0;
-        rounds = 0;
-        multiplier = 0.7;
-    }
 
     public static void EndJumpy() {
         runtime.cancel();
@@ -178,6 +179,5 @@ public class JUMPYGAME {
                 GUI.addPanel(BOARD.panel, BOARD.keyListener);
             }
         }, 300);
-
     }
 }
