@@ -18,6 +18,7 @@ public class JUMPYGAME {
     static int rounds;
     static double multiplier;
     public static int activePlayers;
+    public static Timer runtime;
 
     public JUMPYGAME() {
 
@@ -27,6 +28,7 @@ public class JUMPYGAME {
         rounds = 0;
         multiplier = 0.7;
         activePlayers = 0;
+        runtime = new Timer();
 
         panel = new JPanel();
         panel.setVisible(true);
@@ -72,6 +74,7 @@ public class JUMPYGAME {
                         if(playerCount>5){
                         players.get(5).TryJump();}
                     }
+                    case KeyEvent.VK_ESCAPE -> JUMPYGAME.EndJumpy();
                 }
             }
 
@@ -89,9 +92,7 @@ public class JUMPYGAME {
         clean();
         prep();
         drawjumpy.refresh();
-
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
+        runtime.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 GUI.removePanel();
@@ -102,8 +103,9 @@ public class JUMPYGAME {
                 drawjumpy.refresh();
 
                 if (activePlayers <= 0) {
-                    timer.cancel();
+                    runtime.cancel();
                     System.out.println("Winner is PlayerX");
+                    EndJumpy();
                 }
             }
         }, 50, 40);
@@ -164,5 +166,18 @@ public class JUMPYGAME {
         hurdleHeight = 0;
         rounds = 0;
         multiplier = 0.7;
+    }
+
+    public static void EndJumpy() {
+        runtime.cancel();
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                GUI.removePanel();
+                GUI.addPanel(BOARD.panel, BOARD.keyListener);
+            }
+        }, 300);
+
     }
 }
