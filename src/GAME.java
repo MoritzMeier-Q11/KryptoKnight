@@ -26,8 +26,6 @@ public class GAME {
         System.out.println(phi + "   " + Math.toDegrees(phi));
         System.out.println("vx: " + xneu);
         System.out.println("vy: " + yneu);
-
-
     }
     public static void NextPlayer() {
         if(currentPlayer < playerList.size() - 1) {

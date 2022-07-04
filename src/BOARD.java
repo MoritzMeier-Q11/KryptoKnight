@@ -27,7 +27,7 @@ public class BOARD {
             @Override
             public void keyTyped(KeyEvent e) {
                 if(e.getKeyChar() == 'p') {
-                    PONG.PlayCircle();
+                    PONG.PlayPong();
                 }
                 if(e.getKeyChar() == 's') {
                     SNAKEGAME.PlaySnake();
