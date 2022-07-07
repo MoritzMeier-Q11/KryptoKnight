@@ -32,6 +32,12 @@ public class BOARD {
                 if(e.getKeyChar() == 's') {
                     SNAKEGAME.PlaySnake();
                 }
+
+                if(e.getKeyChar() == 'j') {
+                    JUMPYGAME.PlayJumpy();
+                    System.out.println("Starting Jumpy-game");
+                }
+
                 if(e.getKeyChar() == 'd') {
                     int value = new Random().nextInt(1, 7);
                     drawdice.setText(String.valueOf(value));

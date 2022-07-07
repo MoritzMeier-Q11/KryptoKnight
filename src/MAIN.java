@@ -8,6 +8,7 @@ public class MAIN {
         new SNAKEGAME();
         new IMAGELOADER();
         new STORAGE();
+        new JUMPYGAME();
 
         new GAME();
 
