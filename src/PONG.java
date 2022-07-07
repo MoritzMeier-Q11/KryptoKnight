@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -222,30 +221,38 @@ public class PONG {
                 }
                 x += vx;
                 y += vy;
-                    /*if (up1 && yp1 > 0) {
+                    if (up1 && Math.pow(450, 2) + Math.pow(yp1, 2) < 250000) {
                         yp1 -= 2;
                     }
-                    if (down1 && yp1 < 930) {
+                    if (down1 && Math.pow(450, 2) + Math.pow(yp1 + 100, 2) < 250000) {
                         yp1 += 2;
                     }
-                    if (up2 && yp2 > 50) {
+                    /*if (up2 && Math.pow(450, 2) + Math.pow(yp2, 2) <= 235255) {
                         yp2 -= 2;
                     }
-                    if (down2 && yp2 < 980) {
+                    if (down2 && Math.pow(550, 2) + Math.pow(yp2, 2) <= 235255) {
                         yp2 += 2;
                     }
-                    if (up3 && xp1 > 0) {
+                    if (up3 && Math.pow(xp1, 2) + Math.pow(450, 2) <= 235255) {
                         xp1 -= 2;
                     }
-                    if (down3 && xp1 < 930) {
+                    if (down3 && Math.pow(xp1, 2) + Math.pow(550, 2) <= 235255) {
                         xp1 += 2;
                     }
-                    if (up4 && xp2 > 50) {
+                    if (up4 &&  Math.pow(xp2, 2) + Math.pow(450, 2) <= 235255) {
                         xp2 -= 2;
                     }
-                    if (down4 && xp2 < 980) {
+                    if (down4 && Math.pow(xp2, 2) + Math.pow(550, 2) <= 235255) {
                         xp2 += 2;
                     }*/
+                if(x < -470) {
+                    System.out.println("ttor");
+                }
+                System.out.println(y + "  " + yp1);
+                if(y < yp1 + 100 && y > yp1 - 100 && x < -470) {
+                    System.out.println("tto abgewehrt");
+                    vx = -vx;
+                }
             }
         }, 0, 2);
     }
@@ -334,100 +341,108 @@ public class PONG {
                 }
             }, 300000);
         } else if(GAME.playerList.size() == 4) {
-                label1.setText(GAME.playerList.get(0).name + " & " + GAME.playerList.get(1).name + ": " + String.valueOf(0));
-                label2.setText(GAME.playerList.get(2).name + " & " + GAME.playerList.get(3).name + ": " + String.valueOf(0));
-                timer = new Timer();
-                timer.scheduleAtFixedRate(new TimerTask() {
-                    @Override
-                    public void run() {
-                        if (score1 >= 5) {
-                            win.setText("Team 1 hat gewonnen");
-                            win.setVisible(true);
-                            EndPong();
-                            timer.cancel();
-                        }
-                        if (score2 >= 5) {
-                            win.setText("Team 2 hat gewonnen");
-                            win.setVisible(true);
-                            EndPong();
-                            timer.cancel();
-                        }
-
-                        x += vx;
-                        y += vy;
-                        if (x >= 35 && x <= 55 && y - 30 == yp1 || x >= 35 && x <= 55 && y == yp1 + 50 || x >= 35 && x <= 55 && y - 30 == yp2 || x >= 35 && x <= 55 && y == yp2 + 50) {
-                            vy = -vy;
-                        }
-                        if (x >= 1835 && x <= 1855 && y - 30 == yp3 || x >= 1835 && x <= 1855 && y == yp3 + 50 || x >= 1835 && x <= 1855 && y - 30 == yp4 || x >= 1835 && x <= 1855 && y == yp4 + 50) {
-                            vy = -vy;
-                        }
-                        if (x <= 70 && x > 60 && y >= yp1 - size && y <= yp1 + 50 || x <= 70 && x > 60 && y >= yp2 - size && y <= yp2 + 50) {
-                            vx = -vx;
-                        }
-                        if (x >= 1850 - size && x < 1860 - size && y >= yp3 - size && y <= yp3 + 50 || x >= 1850 - size && x < 1860 - size && y >= yp4 - size && y <= yp4 + 50) {
-                            vx = -vx;
-                        }
-                        if (x <= 0 && y >= 0 && y <= GUI.height - size) {
-                            Reset();
-                            score2++;
-                            label2.setText(GAME.playerList.get(2).name + " & " + GAME.playerList.get(3).name + ": " + String.valueOf(score2));
-                        }
-                        if (x >= GUI.width - size && y >= 0 && y <= GUI.height - size) {
-                            Reset();
-
-                            score1++;
-                            label1.setText(GAME.playerList.get(0).name + " & " + GAME.playerList.get(1).name + ": " + String.valueOf(score1));
-                        }
-                        if (y <= 0 && x >= 0 && x <= GUI.width - size || y >= GUI.height - size && x >= 0 && x <= GUI.width - size) {
-                            vy = -vy;
-                        }
-                        if (up1 && yp1 > 0) {
-                            yp1 -= 2;
-                        }
-                        if (down1 && yp1 < 930) {
-                            yp1 += 2;
-                        }
-                        if (up2 && yp2 > 50) {
-                            yp2 -= 2;
-                        }
-                        if (down2 && yp2 < 980) {
-                            yp2 += 2;
-                        }
-                        if (up3 && yp3 > 0) {
-                            yp3 -= 2;
-                        }
-                        if (down3 && yp3 < 930) {
-                            yp3 += 2;
-                        }
-                        if (up4 && yp4 > 50) {
-                            yp4 -= 2;
-                        }
-                        if (down4 && yp4 < 980) {
-                            yp4 += 2;
-                        }
-                    }
-                }, 0, 2);
-                Timer end = new Timer();
-                end.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        if (score1 == score2) {
-                            win.setText("Unentschieden!");
-                            win.setVisible(true);
-                        } else if (score1 > score2) {
-                            win.setText("Team 1 hat gewonnen");
-                            win.setVisible(true);
-                        } else {
-                            win.setText("Team 2 hat gewonnen");
-                            win.setVisible(true);
-                        }
+            label1.setText(GAME.playerList.get(0).name + " & " + GAME.playerList.get(1).name + ": " + String.valueOf(0));
+            label2.setText(GAME.playerList.get(2).name + " & " + GAME.playerList.get(3).name + ": " + String.valueOf(0));
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    if (score1 >= 5) {
+                        win.setText("Team 1 hat gewonnen");
+                        win.setVisible(true);
                         EndPong();
                         timer.cancel();
                     }
-                }, 300000);
+                    if (score2 >= 5) {
+                        win.setText("Team 2 hat gewonnen");
+                        win.setVisible(true);
+                        EndPong();
+                        timer.cancel();
+                    }
+
+                    x += vx;
+                    y += vy;
+                    if (x >= 35 && x <= 55 && y - 30 == yp1 || x >= 35 && x <= 55 && y == yp1 + 50 || x >= 35 && x <= 55 && y - 30 == yp2 || x >= 35 && x <= 55 && y == yp2 + 50) {
+                        vy = -vy;
+                    }
+                    if (x >= 1835 && x <= 1855 && y - 30 == yp3 || x >= 1835 && x <= 1855 && y == yp3 + 50 || x >= 1835 && x <= 1855 && y - 30 == yp4 || x >= 1835 && x <= 1855 && y == yp4 + 50) {
+                        vy = -vy;
+                    }
+                    if (x <= 70 && x > 60 && y >= yp1 - size && y <= yp1 + 50 || x <= 70 && x > 60 && y >= yp2 - size && y <= yp2 + 50) {
+                        vx = -vx;
+                    }
+                    if (x >= 1850 - size && x < 1860 - size && y >= yp3 - size && y <= yp3 + 50 || x >= 1850 - size && x < 1860 - size && y >= yp4 - size && y <= yp4 + 50) {
+                        vx = -vx;
+                    }
+                    if (x <= 0 && y >= 0 && y <= GUI.height - size) {
+                        Reset();
+                        score2++;
+                        label2.setText(GAME.playerList.get(2).name + " & " + GAME.playerList.get(3).name + ": " + String.valueOf(score2));
+                    }
+                    if (x >= GUI.width - size && y >= 0 && y <= GUI.height - size) {
+                        Reset();
+                        x = 945;
+                        y = 525;
+                        vx = -2;
+                        vy = 2;
+                        score1++;
+                        label1.setText(GAME.playerList.get(0).name + " & " + GAME.playerList.get(1).name + ": " + String.valueOf(score1));
+                    }
+                    if (y <= 0 && x >= 0 && x <= GUI.width - size || y >= GUI.height - size && x >= 0 && x <= GUI.width - size) {
+                        vy = -vy;
+                    }
+                    if (up1 && yp1 > 0) {
+                        yp1 -= 2;
+                    }
+                    if (down1 && yp1 < 930) {
+                        yp1 += 2;
+                    }
+                    if (up2 && yp2 > 50) {
+                        yp2 -= 2;
+                    }
+                    if (down2 && yp2 < 980) {
+                        yp2 += 2;
+                    }
+                    if (up3 && yp3 > 0) {
+                        yp3 -= 2;
+                    }
+                    if (down3 && yp3 < 930) {
+                        yp3 += 2;
+                    }
+                    if (up4 && yp4 > 50) {
+                        yp4 -= 2;
+                    }
+                    if (down4 && yp4 < 980) {
+                        yp4 += 2;
+                    }
+                }
+            }, 0, 2);
+            Timer end = new Timer();
+            end.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if(score1 == score2)
+                    {
+                        win.setText("Unentschieden!");
+                        win.setVisible(true);
+                    }
+                    else if(score1 > score2)
+                    {
+                        win.setText("Team 1 hat gewonnen");
+                        win.setVisible(true);
+                    }
+                    else
+                    {
+                        win.setText("Team 2 hat gewonnen");
+                        win.setVisible(true);
+                    }
+                    EndPong();
+                    timer.cancel();
+                }
+            }, 300000);
         }
 
-        else {
+        else if(GAME.playerList.size() > 4) {
            PlayCircle();
         }
 
